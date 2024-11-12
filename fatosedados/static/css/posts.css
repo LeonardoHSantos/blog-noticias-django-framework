@@ -79,3 +79,60 @@
 .container-posts .post .content-post .post-content {
     font-size: 1.855rem;
 }
+
+
+/* ------------------------------ POST ASIDE ------------------------------ */
+.post-latest-news,
+.post-adsense {
+    width: 20vw;
+    position: sticky;
+    top: 84px;
+    margin-top: 10px;
+    background-color: white;
+    /* background-color: yellow; */
+    /* box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px; */
+    
+}
+
+.post-latest-news,
+.post-adsense {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 4px 10px;
+    gap: 10px;
+}
+
+.post-latest-news .latest-news,
+.post-adsense .adsense {
+    width: 100%;
+    background-color: #c7c79c;
+}
+.post-latest-news .latest-news {
+    height: 85px;
+}
+.post-adsense .adsense {
+    height: 95px;
+}
+
+.post-latest-news .container-posts {
+    gap: 4px;
+}
+.post-latest-news .container-posts .post {
+    margin: 0;
+    padding: 4px;
+}
+.post-latest-news .container-posts .post .content-post {
+    gap: 0;
+}
+.post-latest-news .container-posts .post .content-post .post-datails {
+    width: 46%;
+}
+.post-latest-news .container-posts .post .content-post .post-content {
+    font-size: 12px;
+}
+.post-latest-news .container-posts .post .content-post .post-image {
+    width: 40%;
+    max-height: 22vh;
+}

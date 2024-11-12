@@ -17,6 +17,7 @@ class Post(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     cover_image = models.ImageField(upload_to=upload_to_cover, blank=True, null=True)  # Imagem principal do post
+    number_of_visitors = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
