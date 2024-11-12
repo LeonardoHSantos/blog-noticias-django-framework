@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Nome da Página{% endblock %}
+{% block content %}
+
+    <h1>Blog</h1>
+    <div class="container-principal">
+        <aside>
+            <div>
+                <h3>últimas notícias</h3>
+            </div>
+        </aside>
+
+        <main class="main-posts">
+            <ul class="container-posts">
+                {% for post in posts %}
+                    <li class="post">
+                        <a href="">
+                            <div class="content-post">
+                                
+                                                            
+                                <div class="post-datails">
+            
+                                    <p class="post-create-at">
+                                        <!-- <span>Publicado:</span> -->
+                                        <span>{{ post.created_at }}</span>
+                                    </p>
+    
+                                    <h2>
+                                        {{ post.title }}
+                                    </h2>
+            
+                                    <p class="post-content">
+                                        {{ post.content|truncatechars:55 }}
+                                    </p>
+                                    <!-- <p class="post-author">
+                                        <small>Publicado por: {{ post.author }}</small>
+                                    </p> -->
+                                </div>
+    
+                                <div class="post-image">
+                                    {% if post.cover_image %}
+                                        <img src="{{ post.cover_image.url }}" alt="Imagem de Capa">
+                                    {% endif %}
+                                </div>
+    
+                            </div>
+                        </a>
+                        
+                        
+                        
+                    </li>
+                    
+                    
+                {% endfor %}
+            </ul>
+        </main>
+
+        <div class="adsense">
+            <div>
+                <h3>anúncio</h3>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
