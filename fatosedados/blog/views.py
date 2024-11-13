@@ -12,6 +12,12 @@ def home(request):
     
     return render(request, 'blog/post_list.html', {'posts': posts, 'addtional_images': addtional_images, 'latest_posts': latest_posts})
 
+def termos(request):
+    return render(request, 'termos_privacidade/termos.html')
+
+def privacidade(request):
+    return render(request, 'termos_privacidade/politica.html')
+
 def post_list(request):
     posts = Post.objects.all().order_by("-number_of_visitors")
     addtional_images = PostImage.objects.all()
