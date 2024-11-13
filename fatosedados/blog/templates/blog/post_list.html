@@ -25,8 +25,8 @@
                                         <span>{{ post.created_at }}</span>
                                     </p>
     
-                                    <h2>
-                                        {{ post.title }}
+                                    <h2 class="title-mini-post">
+                                        {{ post.title|truncatechars:40 }}
                                     </h2>
             
                                     <p class="post-content">

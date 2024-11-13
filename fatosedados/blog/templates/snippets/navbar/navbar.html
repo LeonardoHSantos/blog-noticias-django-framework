@@ -6,17 +6,24 @@
 
         <li><a href="{% url 'home' %}">Início</a></li>
         <li><a href="{% url 'post_list' %}">Posts</a></li>
-        <li><a href="/contato">Contato</a></li>
-        <li><a href="/sobre">Sobre</a></li>
+        <li><a href="{% url 'contato' %}">Contato</a></li>
+        <li><a href="{% url 'sobre' %}">Sobre</a></li>
+        <li><a href="{% url 'termos' %}">Termos</a></li>
     </ul>
     <div class="navbar-user">
 
-        <a href="{% url 'post_list' %}">
-            <span>Login</span>
+        {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}" class="navbar-user-logout">
+            <span>Sair</span>
         </a>
+        {% else %}
+            <a href="{% url 'login' %}" class="navbar-user-login">
+                <span>Login</span>
+            </a>
 
-        <a href="{% url 'post_list' %}">
-            <span>Cadastro</span>
-        </a>
+            <a href="{% url 'register' %}" class="navbar-user-register">
+                <span>Cadastro</span>
+            </a>
+        {% endif %}
     </div>
 </nav>

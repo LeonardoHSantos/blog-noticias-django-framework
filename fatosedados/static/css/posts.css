@@ -23,9 +23,11 @@
 }
 
 .container-posts {
+    max-width: 100%;
     flex-direction: column;
 }
 .container-posts .post {
+    max-width: 100%;
     flex-direction: column;
     border: 0;
     border-radius: 0;
@@ -76,9 +78,17 @@
     padding: 10px;
     gap: 10px;
 }
+.container-posts .post .content-post .post-datails h2 {
+    text-decoration: underline;
+}
+.container-posts .post .content-post .post-datails .title-mini-post {
+    width: 100%;
+    font-size: 0.755rem;
+}
 
 .container-posts .post .content-post .post-content {
-    font-size: 1.855rem;
+    color: #2d2e37;
+    font-size: 1.455rem;
 }
 
 

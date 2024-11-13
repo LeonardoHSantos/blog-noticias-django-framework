@@ -1,7 +1,66 @@
-from django.db import models
-
 import os
 from datetime import datetime
+
+from django.db import models
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.utils import timezone
+from django.contrib.auth.hashers import make_password
+
+class UserRegistrationManager(BaseUserManager):
+    def create_user(self, email, name, password=None):
+        if not email:
+            raise ValueError("O usuário deve ter um email")
+        if not name:
+            raise ValueError("O usuário deve ter um nome")
+
+        user = self.model(
+            email=self.normalize_email(email),
+            name=name,
+            last_login=timezone.now(),  # Define o last_login como o momento atual
+            date_joined=timezone.now()  # Define o date_joined como o momento atual
+        )
+        user.password = make_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, name, password=None):
+        user = self.create_user(email, name, password)
+        user.is_superuser = True
+        user.is_staff = True
+        user.save(using=self._db)
+        return user
+
+class UserRegistration(AbstractBaseUser):
+    name = models.CharField(max_length=150)
+    email = models.EmailField(unique=True)
+    password = models.CharField(max_length=128)
+    last_login = models.DateTimeField(default=timezone.now)
+    date_joined = models.DateTimeField(default=timezone.now)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)  # Para permitir login no admin
+    is_superuser = models.BooleanField(default=False)
+
+    objects = UserRegistrationManager()
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['name']
+
+    def __str__(self):
+        return self.email
+    
+
+class Contact(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Contato de {self.name} - {self.email} em {self.created_at.strftime('%Y-%m-%d %H:%M')}"
+
+
+
+
 
 def upload_to_cover(instance, filename):
     # Define o diretório para a imagem principal

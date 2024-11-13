@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Contato {% endblock %}
+
+{% block content %}
+<div class="contact-container">
+    <div class="header-form">
+        <h1>Contato</h1>
+        <p>Entre em contato conosco preenchendo o formulário abaixo:</p>
+    </div>
+
+    <form action="{% url 'contato' %}" method="post" class="contact-form">
+        {% csrf_token %}
+        <div class="input">
+            <label for="name">Nome</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="input">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="input">
+            <label for="message">Mensagem</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+
+        <button type="submit">Enviar</button>
+    </form>
+
+    <div class="contact-info">
+        <p><strong>Email:</strong> <a href="mailto:leonardo.hsantos@outlook.com">leonardo.hsantos@outlook.com</a></p>
+        <p><strong>WhatsApp:</strong> <a href="https://wa.me/5541988412653" target="_blank">(41) 9 8841-2653</a></p>
+    </div>
+</div>
+{% endblock %}

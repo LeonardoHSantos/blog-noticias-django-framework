@@ -1,0 +1,53 @@
+<!-- templates/404.html -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Não Encontrada - Erro 404</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .error-container {
+            text-align: center;
+        }
+        .error-container h1 {
+            font-size: 72px;
+            margin: 0;
+            color: #e74c3c;
+        }
+        .error-container h2 {
+            font-size: 24px;
+            margin: 10px 0;
+        }
+        .error-container p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .error-container a {
+            text-decoration: none;
+            color: #ff2c02;
+            font-weight: bold;
+        }
+        .error-container a:hover {
+            color: #fc0707;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <h1>404</h1>
+        <h2>Página Não Encontrada</h2>
+        <p>Desculpe, a página que você está procurando não existe.</p>
+        <a href="{% url 'home' %}">Voltar para a Página Inicial</a>
+    </div>
+</body>
+</html>

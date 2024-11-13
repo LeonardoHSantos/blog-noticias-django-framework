@@ -2,29 +2,29 @@
 <footer class="footer">
     <div class="footer-sections">
         <div class="footer-section">
-            <h3>Fatos & Dados</h3>
+            <h3>Fatos&Dados</h3>
             <ul>
                 <li><a href="{% url 'home' %}">Início</a></li>
                 <li><a href="{% url 'post_list' %}">Posts</a></li>
-                <li><a href="/contato">Contato</a></li>
-                <li><a href="/sobre">Sobre</a></li>
+                <li><a href="{% url 'contato' %}">Contato</a></li>
+                <li><a href="{% url 'sobre' %}">Sobre</a></li>
             </ul>
         </div>
         <div class="footer-section">
             <h3>Suporte</h3>
             <ul>
-                <li><a href="/contato">Fale Conosco</a></li>
+                <li><a href="{% url 'contato' %}">Fale Conosco</a></li>
             </ul>
         </div>
         <div class="footer-section">
             <h3>Legal</h3>
             <ul>
-                <li><a href="/privacidade">Política de Privacidade</a></li>
-                <li><a href="/termos">Termos de Serviço</a></li>
+                <li><a href="{% url 'privacidade' %}">Política de Privacidade</a></li>
+                <li><a href="{% url 'termos' %}">Termos de Serviço</a></li>
             </ul>
         </div>
     </div>
     <div class="footer-bottom">
-        <p>fatosedados.com © 2024 Fatos & Dados</p>
+        <p>fatosedados.com © 2024 Fatos&Dados</p>
     </div>
 </footer>

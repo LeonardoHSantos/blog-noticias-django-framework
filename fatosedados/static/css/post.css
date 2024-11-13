@@ -50,7 +50,9 @@
 .main-post .content {
     font-size: 1.045rem;
     font-weight: 600;
+    padding: 10px;
     color: #313127;
+    background-color: white;
 }
 
 .main-post .info {

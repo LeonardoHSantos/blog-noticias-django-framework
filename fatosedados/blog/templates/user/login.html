@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Login {% endblock %}
+
+{% block content %}
+
+
+<div class="contact-container">
+
+    {% if user.is_authenticated %}
+        <div class="header-form-success-save" style="height: 50vh;">
+            <h1>Olá, {{ user.email }}</h1>
+            <p>Você já está autenticado!</p>
+            <a href="{% url 'home' %}">Página incial</a>
+        </div>
+    {% else %}
+    <div class="header-form">
+        <h1>Login</h1>
+        <p>Entre em sua conta</p>
+    </div>
+
+    <form action="{% url 'login' %}" method="post" class="contact-form">
+        {% csrf_token %}
+        
+        <div class="input">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="input">
+            <label for="password">Senha</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+
+        <button type="submit">Entrar</button>
+    </form>
+
+    {% endif %}
+</div>
+{% endblock %}

@@ -21,7 +21,7 @@ li {
     padding: 20px;
 }
 
-/* Estilo da navbar com efeito de vidro */
+/* --------------------------------------------------- NAVBAR ---------------------------------------------------  */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -84,9 +84,38 @@ li {
     transition: background-color 0.3s, color 0.3s;
 }
 
-.navbar-user a:hover {
-    color: #040404;
-    background-color: #ffffff;
+.navbar-user a.navbar-user-register {
+    color: #fff;
+    background-color: #040404;
+}
+
+.navbar-user a.navbar-user-register:hover {
+    /* color: #040404; */
+    background-color: #333;
+}
+
+
+/* --------------------------------------------------- SOBRE ---------------------------------------------------  */
+.about-container {
+    max-width: 100%;
+    margin: 10px 0;
+    padding: 20px;
+    color: #333;
+    background: #fff;
+    text-align: left;
+}
+
+.about-container h1 {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.about-container p {
+    font-size: 1.2em;
+    line-height: 1.6em;
+    margin-bottom: 15px;
+    color: #555;
 }
 
 
@@ -154,4 +183,129 @@ li {
     padding-top: 15px;
     font-weight: 600;
     color: #666;
+}
+
+/* --------------------------------------------------- CONTATO ---------------------------------------------------  */
+.contact-container {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 10px 0;
+}
+
+.contact-container .header-form h1 {
+    font-size: 2rem;
+    color: #333;
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+.contact-container .header-form p {
+    font-size: 1rem;
+    color: #666;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 45vw;
+    padding: 30px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.contact-form .input {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form .input label {
+    width: 100%;
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.contact-form .input input,
+.contact-form .input textarea {
+    max-width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.contact-form .input input:focus,
+.contact-form .input textarea:focus {
+    border-color: #007bff;
+}
+
+.contact-form .input textarea {
+    resize: vertical;
+}
+
+.contact-form button {
+    padding: 12px 0;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.contact-form button:hover {
+    background-color: #0056b3;
+}
+
+.contact-info {
+    width: 100%;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.contact-info a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
+}
+
+
+.header-form-success-save {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    padding: 10px;
+}
+
+.contact-container .header-form-success-save p {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #158b14;
+    text-align: center;
+    margin: 20px 0;
+}
+.contact-container .header-form-success-save a  {
+    color: white;
+    background: green;
+    text-decoration: none;
+    border-radius: 4px;
+    padding: 10px;
 }

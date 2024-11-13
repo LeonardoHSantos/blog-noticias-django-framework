@@ -9,8 +9,17 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+DJANGO_DEBUG = os.getenv("DJANGO_DEBUG")
+if DJANGO_DEBUG == "False" or False:
+    DEBUG = False
+
+print(">>>> DEBUG: ", DEBUG)
+print(">>>> DJANGO_DEBUG: ", DJANGO_DEBUG)
+
+
 
 ALLOWED_HOSTS = ["*"]
+
 
 
 # Application definition
@@ -22,8 +31,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog'
+    'blog',
+    # 'fatosedados'
 ]
+
+AUTH_USER_MODEL = 'blog.UserRegistration'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
