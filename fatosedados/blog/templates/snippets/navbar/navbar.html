@@ -1,0 +1,22 @@
+{% load static %}
+<nav class="navbar">
+    <ul class="navbar-links">
+
+        <li><a href="{% url 'home' %}">Fatos&Dados</a></li>
+
+        <li><a href="{% url 'home' %}">Início</a></li>
+        <li><a href="{% url 'post_list' %}">Posts</a></li>
+        <li><a href="/contato">Contato</a></li>
+        <li><a href="/sobre">Sobre</a></li>
+    </ul>
+    <div class="navbar-user">
+
+        <a href="{% url 'post_list' %}">
+            <span>Login</span>
+        </a>
+
+        <a href="{% url 'post_list' %}">
+            <span>Cadastro</span>
+        </a>
+    </div>
+</nav>

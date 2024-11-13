@@ -28,8 +28,9 @@
 .container-posts .post {
     flex-direction: column;
     border: 0;
-    border-bottom: 1px solid rgb(128, 129, 124);
     border-radius: 0;
+    border-bottom: 1px solid rgb(128, 129, 124);
+    background-color: white;
 }
 .container-posts .post a {
     color: black;

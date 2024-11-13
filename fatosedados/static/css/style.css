@@ -17,9 +17,72 @@ ul {
     padding: 0;
 }
 li {
-    background: #fff;
     margin: 10px;
     padding: 20px;
-    border: 1px solid #ddd;
+}
+
+/* Estilo da navbar com efeito de vidro */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.5); /* Fundo com opacidade */
+    backdrop-filter: blur(10px); /* Efeito de vidro */
+    -webkit-backdrop-filter: blur(10px); /* Compatibilidade com Safari */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra leve */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Linha no final da navbar */
+}
+
+/* Estilo dos itens da navbar */
+.navbar li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Links da navbar */
+.navbar-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.navbar-links li a {
+    text-decoration: none;
+    font-size: 16px;
+    padding: 8px 12px;
+    color: #000000;
+    font-weight: 600;
+    transition: background-color 0.3s, color 0.3s;
     border-radius: 5px;
+}
+
+.navbar-links li a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #333333;
+}
+
+/* Estilo do container do usuário */
+.navbar-user {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.navbar-user a {
+    color: #000000;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar-user a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #333333;
 }

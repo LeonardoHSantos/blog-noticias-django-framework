@@ -16,8 +16,15 @@
     height: 100%;
     background-color: #c7c79c;
 }
+
 .main-post {
     width: 60vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 10px 0;
+    gap: 10px;
 }
 
 .main-post .post-image {
@@ -39,13 +46,7 @@
     color: #63635b;
     font-size: 12px;
 }
-.main-post {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: 10px;
-}
+
 .main-post .content {
     font-size: 1.045rem;
     font-weight: 600;
