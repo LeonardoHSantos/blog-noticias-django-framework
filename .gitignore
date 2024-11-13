@@ -2,5 +2,6 @@
 __pycache__
 *.csv
 *.json
+*.pem
 .env
 test.py

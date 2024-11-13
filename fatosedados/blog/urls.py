@@ -16,6 +16,7 @@ urlpatterns = [
     path('privacidade/', views.privacidade, name='privacidade'),
 
     path('posts/', views.post_list, name='post_list'),
+    path('create-post/', views.create_post, name='create_post'),
     path('post/<int:post_id>/<str:title_post>', views.post, name='post'),
 ]
 

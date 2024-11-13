@@ -1,4 +1,5 @@
 import re
+from datetime import datetime
 
 from django.shortcuts import render, redirect
 from django.http.response import JsonResponse
@@ -137,12 +138,35 @@ def privacidade(request):
     return render(request, 'termos_privacidade/politica.html')
 
 def post_list(request):
+    
     posts = Post.objects.all().order_by("-number_of_visitors")
     addtional_images = PostImage.objects.all()
 
     latest_posts = Post.objects.all()[:3]
     
     return render(request, 'blog/post_list.html', {'posts': posts, 'addtional_images': addtional_images, 'latest_posts': latest_posts})
+
+def create_post(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        author = request.POST.get('author')
+        content = request.POST.get('content')
+        cover_image = request.FILES.get('cover_image')  # Supondo que o campo de imagem esteja no formulário
+
+        if not all([title, author, content]):
+            return JsonResponse({"statusCode": 400, "msg": "Todos os campos obrigatórios devem ser preenchidos."})
+
+        post = Post.objects.create(
+            title=title,
+            author=author,
+            content=content,
+            cover_image=cover_image,
+            created_at=datetime.now()
+        )
+
+        return redirect('post_list')  # Redireciona para uma página de sucesso (deve ser ajustada ao seu projeto)
+    
+    return render(request, 'blog/create_post.html')
 
 # @never_cache
 def post(request, post_id, title_post):

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Novo Post {% endblock %}
+
+{% block content %}
+<div class="contact-container">
+    <div class="header-form">
+        <h1>Novo Post</h1>
+        <!-- <p>Entre em contato conosco preenchendo o formulário abaixo:</p> -->
+    </div>
+
+    <form action="{% url 'create_post' %}" method="post" enctype="multipart/form-data" class="contact-form">
+        {% csrf_token %}
+        <div class="input">
+            <label for="title">Título</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+
+        <div class="input">
+            <label for="author">Autor</label>
+            <input type="text" id="author" name="author" required>
+        </div>
+
+        <div class="input">
+            <label for="content">Mensagem</label>
+            <textarea id="content" name="content" rows="5" required></textarea>
+        </div>
+
+        <div class="input">
+            <label for="content">Imagem de Capa</label>
+            <input type="file" id="cover_image" name="cover_image" accept="image/*">
+        </div>
+
+        <button type="submit">Salvar Post</button>
+    </form>
+
+</div>
+{% endblock %}
