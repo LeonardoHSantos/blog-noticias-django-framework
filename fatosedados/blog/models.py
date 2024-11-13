@@ -1,15 +1,39 @@
 from django.db import models
 
 import os
-from django.db import models
+from datetime import datetime
 
 def upload_to_cover(instance, filename):
     # Define o diretório para a imagem principal
-    return os.path.join('post_images_principal', f'pasta_{instance.id}', filename)
+    dt = datetime.now()
+    year = dt.year
+    month = dt.month
+    day = dt.day
+
+    dirname = f"{year}/{month}/{day}"
+    next_id = Post.objects.all()
+    
+    if next_id.filter(id=instance.id).first():
+        next_id = next_id.filter(id=instance.id).first().pk
+    else:
+        next_id = len(next_id) + 1
+    return os.path.join('post_images_principal', f'{dirname}/{next_id}', filename)
 
 def upload_to_additional(instance, filename):
     # Define o diretório para as imagens adicionais
-    return os.path.join('post_images_post', f'pasta_{instance.post.id}', filename)
+    dt = datetime.now()
+    year = dt.year
+    month = dt.month
+    day = dt.day
+    dirname = f"{year}/{month}/{day}"
+
+    next_id = Post.objects.all()
+    next_id = next_id.filter(id=instance).first()
+    if next_id:
+        next_id = next_id.pk
+    else:
+        next_id = len(next_id) + 1
+    return os.path.join('post_images_post', f'{dirname}/{next_id}', filename)
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
