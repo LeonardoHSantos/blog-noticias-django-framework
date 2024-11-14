@@ -1,0 +1,67 @@
+.banner-adsense {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 180px;
+    margin: 10px 0;
+}
+.banner-adsense .adsense {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: 100%;
+    background-color: #c7c79c;
+}
+
+.main-post {
+    width: 60vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 10px 0;
+    gap: 10px;
+}
+
+.main-post .post-image {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    height: 64vh;
+    margin: 10px 0;
+    gap: 4px;
+}
+.main-post .post-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.main-post .post-image .font-image {
+    color: #63635b;
+    font-size: 12px;
+}
+
+.main-post .content {
+    font-size: 1.045rem;
+    font-weight: 600;
+    padding: 10px;
+    color: #313127;
+    background-color: white;
+}
+
+.main-post .info {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2px;
+    font-size: 12px;
+    color: #000;
+    font-weight: 500;
+}
