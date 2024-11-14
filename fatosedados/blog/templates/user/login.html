@@ -9,7 +9,7 @@
 
     {% if user.is_authenticated %}
         <div class="header-form-success-save" style="height: 50vh;">
-            <h1>Olá, {{ user.email }}</h1>
+            <h1>Olá, {{ user.name }}</h1>
             <p>Você já está autenticado!</p>
             <a href="{% url 'home' %}">Página incial</a>
         </div>
