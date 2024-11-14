@@ -49,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'fatosedados.urls'
@@ -129,10 +130,26 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),  # Isso deve apontar para o diretório 'static' na raiz
 ]
 
-STATIC_ROOT = os.path.join('staticfiles')
+# STATIC_ROOT = os.path.join('/fatosedados/static')
 
 MEDIA_URL = '/media/'  # URL para acessar os arquivos de mídia
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Diretório onde os arquivos serão salvos
+print("\n\n >>>> ------------------------- MEDIA_ROOT ------------------------- ")
+print(MEDIA_ROOT)
+
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# from whitenoise import WhiteNoise
+# class WhiteNoiseMedia(WhiteNoise):
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+
+#     def add_files(self, path, prefix=None):
+#         # Serve arquivos de mídia diretamente
+#         media_root = os.path.join(BASE_DIR, 'media')
+
+#         print(" ---------------------- media_root | TESTE ---------------------- ")
+#         print(media_root)
+#         self.add_files(media_root, prefix='/media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
