@@ -11,3 +11,14 @@ Durante os primeiros Deploys do site no Ubuntu, me deparei com problemas de perm
 sudo chown -R $USER:$USER /home/ubuntu/blog_fatos_e_dados/blog-noticias-django-framework/venv/
 </code>
 </pre>
+
+### #Ação necessária no Linux 22.04 para instalar mysqlclient
+
+Ainda sobre a instalação das dependências "requirements.txt" é necessário instalar os pacotes pkg-config para compilar e linkar softwares.
+
+#### Caso necessário resolva o problema de instalação do mysqlclient com esse comando:<br>
+<pre>
+<code>
+sudo apt-get install pkg-config
+</code>
+</pre>

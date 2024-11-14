@@ -19,6 +19,10 @@ print(">>>> DJANGO_DEBUG: ", DJANGO_DEBUG)
 
 
 ALLOWED_HOSTS = ["*"]
+CSRF_TRUSTED_ORIGINS = [
+    "http://estampaverso.shop", # teste 
+    "https://estampaverso.shop" # teste
+]
 
 
 
