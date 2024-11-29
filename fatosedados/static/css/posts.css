@@ -23,7 +23,7 @@
 }
 
 .container-posts {
-    max-width: 100%;
+    width: 100%;
     flex-direction: column;
 }
 .container-posts .post {
@@ -146,4 +146,25 @@
 .post-latest-news .container-posts .post .content-post .post-image {
     width: 40%;
     max-height: 22vh;
+}
+
+/* ------------------------ POST TOOLS ADMIN ------------------------ */
+
+.post-tools-admin {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 10px 5px;
+    border-top: 1px solid #c9cad3;
+    border-radius: 2px;
+    /* background-color: rgb(235, 245, 245); */
+}
+.post-tools-admin ul,
+.post-tools-admin ul li {
+    margin: 0;
+    padding: 0;
+}
+.post-tools-admin ul {
+    padding: 10px;
 }

@@ -22,19 +22,25 @@ li {
 }
 
 /* --------------------------------------------------- NAVBAR ---------------------------------------------------  */
-.navbar {
+.conatainer-navbar {
+    width: 100%;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
+    flex-direction: column;
     position: sticky;
     top: 0;
     z-index: 1;
     background-color: rgba(255, 255, 255, 0.5); /* Fundo com opacidade */
     backdrop-filter: blur(10px); /* Efeito de vidro */
     -webkit-backdrop-filter: blur(10px); /* Compatibilidade com Safari */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra leve */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Linha no final da navbar */
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Estilo dos itens da navbar */
@@ -94,6 +100,37 @@ li {
     background-color: #333;
 }
 
+/* --------------------------------------------------- NAVBAR - TOOLS ---------------------------------------------------  */
+.conatainer-navbar .tools {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px 0;
+}
+.conatainer-navbar .tools ul,
+.conatainer-navbar .tools ul li {
+    margin: 0;
+    padding: 0;
+}
+.conatainer-navbar .tools ul {
+    padding: 10px 51px;
+}
+.conatainer-navbar .tools ul li a {
+    text-decoration: none;
+    font-size: 0.855rem;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 5px;
+    color: white;
+    background-color:  #333;
+    transition: 0.3s all;
+}
+.conatainer-navbar .tools ul li a:hover {
+    /* color: #040404; */
+    background-color: #000;
+}
 
 /* --------------------------------------------------- SOBRE ---------------------------------------------------  */
 .about-container {

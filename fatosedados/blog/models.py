@@ -62,21 +62,24 @@ class Contact(models.Model):
 
 
 
-def upload_to_cover(instance, filename):
+def upload_to_cover(instance, filename, instante_id=False):
     # Define o diretório para a imagem principal
     dt = datetime.now()
     year = dt.year
     month = dt.month
     day = dt.day
+    dirname = f"{year}\{month}\{day}"
 
-    dirname = f"{year}/{month}/{day}"
-    next_id = Post.objects.all()
-    
-    if next_id.filter(id=instance.id).first():
-        next_id = next_id.filter(id=instance.id).first().pk
+    if instante_id:
+        next_id = instance.pk
     else:
-        next_id = len(next_id) + 1
-    return os.path.join('post_images_principal', f'{dirname}/{next_id}', filename)
+        next_id = Post.objects.all()
+        if next_id.filter(id=instance.id).first():
+            next_id = next_id.filter(id=instance.id).first().pk
+        else:
+            next_id = len(next_id) + 1
+    
+    return os.path.join('post_images_principal', f'{dirname}\{next_id}', filename)
 
 def upload_to_additional(instance, filename):
     # Define o diretório para as imagens adicionais

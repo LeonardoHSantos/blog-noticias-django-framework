@@ -1,3 +1,4 @@
+import os
 import re
 from datetime import datetime
 
@@ -5,9 +6,13 @@ from django.shortcuts import render, redirect
 from django.http.response import JsonResponse
 # from django.contrib.auth.models import User
 # from django.views.decorators.cache import never_cache
-from .models import Post, PostImage, Contact, UserRegistration
+from .models import Post, PostImage, Contact, UserRegistration, upload_to_cover
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from django.contrib.auth.hashers import check_password
+
+
+
+
 
 def home(request):
     posts = Post.objects.all().order_by("-number_of_visitors")
@@ -57,7 +62,13 @@ def login(request):
             return redirect('home')
         else:
             print("E-mail ou senha incorretos.")
-            return redirect('login')
+            context = {
+                "email": email,
+                "password": password,
+                "error_login": True,
+                "msg": "Usuário ou senha incorretos."
+            }
+            return render(request, "user/login.html", context=context )
 
 def logout(request):
     django_logout(request)
@@ -168,7 +179,48 @@ def create_post(request):
     
     return render(request, 'blog/create_post.html')
 
-# @never_cache
+
+def remove_images(old_image_dir):
+    try:
+        # Verifica se o diretório contém imagens e exclui
+        if os.path.exists(old_image_dir):   
+            for filename in os.listdir(old_image_dir):
+                file_path = os.path.join(old_image_dir, filename)
+                if os.path.isfile(file_path):
+                    os.remove(file_path)
+                    print(f"\n\n Sucesso ao limpar diretório de imagens: {old_image_dir}\n\n")
+    except Exception as e:
+        print(f"\n\n ERROR REMOVE IMAGES | ERROR: {e}")
+        print(f"Diretório: {old_image_dir}")
+    
+
+def post_edit(request, post_id):
+
+    postFilter = Post.objects.all().filter(id=post_id).first()
+
+    if request.method == "POST":
+
+        title = request.POST.get("title")
+        author = request.POST.get("author")
+        content = request.POST.get("content")
+        cover_image = request.FILES.get('cover_image')
+
+        postFilter.title=title
+        postFilter.author=author
+        postFilter.content=content
+
+        # Atualiza diretório de imagem apenas se houver alguma imagem no input do formulário HTML.
+        if cover_image:
+            old_image_path = postFilter.cover_image.path
+            old_image_dir = os.path.dirname(old_image_path)
+            remove_images(old_image_dir=old_image_dir)
+            postFilter.cover_image=cover_image
+            print(f"\n\n ------------ IMAGEM ATUALIZADA | ID: {postFilter.pk} ------------ ")
+        
+        postFilter.save()
+   
+    return render(request, 'blog/post_edit.html', context={"post": postFilter})
+    
 def post(request, post_id, title_post):
 
     if request.method == "GET":
@@ -176,8 +228,18 @@ def post(request, post_id, title_post):
         postFilter = Post.objects.all().filter(id=post_id).first()
         postFilter.number_of_visitors += 1
         postFilter.save()
+
+        context={
+            "post": {
+                "id": postFilter.pk,
+                "title": postFilter.title,
+                "author": postFilter.author,
+                "content": postFilter.content,
+                "cover_image": postFilter.cover_image
+            }
+        }
         
-        return render(request, 'blog/post.html', context={'post': postFilter})
+        return render(request, 'blog/post.html', context=context)
     else:
         return JsonResponse({"statusCode": 400, "msg": "not found"})
 

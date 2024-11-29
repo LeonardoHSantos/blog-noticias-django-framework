@@ -13,11 +13,6 @@ DJANGO_DEBUG = os.getenv("DJANGO_DEBUG")
 if DJANGO_DEBUG == "False" or False:
     DEBUG = False
 
-print(">>>> DEBUG: ", DEBUG)
-print(">>>> DJANGO_DEBUG: ", DJANGO_DEBUG)
-
-
-
 ALLOWED_HOSTS = ["*"]
 CSRF_TRUSTED_ORIGINS = [
     "http://estampaverso.shop", # teste 
@@ -76,19 +71,27 @@ WSGI_APPLICATION = 'fatosedados.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': os.getenv("DB_ENGINE"),
-        'NAME': os.getenv("DB_NAME"),
-        'USER': os.getenv("DB_USER"),
-        'PASSWORD': os.getenv("DB_PASSWORD"),
-        'HOST': os.getenv("DB_HOST"),
-        'PORT': os.getenv("DB_PORT"),
-        'OPTIONS': {
-            'ssl': {'ca': 'us-east-2-bundle.pem'}
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / "db.sqlite3",
         }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': os.getenv("DB_ENGINE"),
+            'NAME': os.getenv("DB_NAME"),
+            'USER': os.getenv("DB_USER"),
+            'PASSWORD': os.getenv("DB_PASSWORD"),
+            'HOST': os.getenv("DB_HOST"),
+            'PORT': os.getenv("DB_PORT"),
+            'OPTIONS': {
+                'ssl': {'ca': 'us-east-2-bundle.pem'}
+            }
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -134,8 +137,7 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'  # URL para acessar os arquivos de mídia
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Diretório onde os arquivos serão salvos
-print("\n\n >>>> ------------------------- MEDIA_ROOT ------------------------- ")
-print(MEDIA_ROOT)
+
 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # from whitenoise import WhiteNoise

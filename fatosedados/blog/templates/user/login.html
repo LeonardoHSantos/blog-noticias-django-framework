@@ -24,12 +24,18 @@
         
         <div class="input">
             <label for="email">E-mail</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email" value="{{ email }}" required>
         </div>
 
         <div class="input">
             <label for="password">Senha</label>
-            <input type="password" id="password" name="password" required>
+            <input type="password" id="password" name="password" value="{{ password }}" required>
+        </div>
+
+        <div class="messages">
+            {% if error_login %}
+                <p style="color: red; text-align: center;">{{ msg }}</p>
+            {% endif %}
         </div>
 
         <button type="submit">Entrar</button>

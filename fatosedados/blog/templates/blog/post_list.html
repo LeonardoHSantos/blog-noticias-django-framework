@@ -45,9 +45,6 @@
     
                             </div>
                         </a>
-                        
-                        
-                        
                     </li>
                     
                     
@@ -91,8 +88,14 @@
     
                             </div>
                         </a>
-                        
-                        
+
+                        {% if user.is_authenticated %}
+                            <div class="post-tools-admin">
+                                <ul>
+                                    <li><a href="{% url 'post_edit' post_id=post.id %}">edit</a></li>
+                                </ul>
+                            </div>
+                        {% endif %}
                         
                     </li>
                     
