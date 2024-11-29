@@ -167,4 +167,21 @@
 }
 .post-tools-admin ul {
     padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+}
+
+.post-tools-admin ul li a {
+    text-decoration: none;
+    padding: 2px 4px;
+    border-radius: 4px;
+    border: 1px solid #6b6c74;
+    color: #6b6c74;
+}
+.post-tools-admin ul li a:hover {
+    color: black;
 }

@@ -16,8 +16,9 @@
         <div class="navbar-user">
     
             {% if user.is_authenticated %}
+            <span>{{ user.name }}</span>,
             <a href="{% url 'logout' %}" class="navbar-user-logout">
-                <span>Sair</span>
+                <span style="color: red;">Sair</span>
             </a>
             {% else %}
                 <a href="{% url 'login' %}" class="navbar-user-login">

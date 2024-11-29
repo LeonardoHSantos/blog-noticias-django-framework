@@ -78,7 +78,9 @@ li {
     display: flex;
     flex-direction: row;
     text-decoration: none;
-    gap: 10px;
+    justify-content: flex-start;
+    align-items: center;
+    /* gap: 10px; */
 }
 
 .navbar-user a {

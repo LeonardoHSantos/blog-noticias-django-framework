@@ -5,6 +5,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.utils import timezone
 from django.contrib.auth.hashers import make_password
+from django.conf import settings
 
 class UserRegistrationManager(BaseUserManager):
     def create_user(self, email, name, password=None):
@@ -104,6 +105,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     cover_image = models.ImageField(upload_to=upload_to_cover, blank=True, null=True)  # Imagem principal do post
     number_of_visitors = models.IntegerField(default=0)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title

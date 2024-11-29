@@ -90,11 +90,14 @@
                         </a>
 
                         {% if user.is_authenticated %}
-                            <div class="post-tools-admin">
-                                <ul>
-                                    <li><a href="{% url 'post_edit' post_id=post.id %}">edit</a></li>
-                                </ul>
-                            </div>
+                            {% if user.id == post.user.id %}
+                                <div class="post-tools-admin">
+                                    <ul>
+                                        <li><a href="{% url 'post_edit' post_id=post.id %}">editar</a></li>
+                                        <li><a href="{% url 'post_delete' post_id=post.id %}">excluir</a></li>
+                                    </ul>
+                                </div>
+                            {% endif %}
                         {% endif %}
                         
                     </li>

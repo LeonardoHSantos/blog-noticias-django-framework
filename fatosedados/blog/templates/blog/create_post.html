@@ -18,11 +18,11 @@
 
         <div class="input">
             <label for="author">Autor</label>
-            <input type="text" id="author" name="author" required>
+            <input type="text" id="author" name="author" value="{{ user.name }}" readonly required style="color: rgb(129, 118, 118);">
         </div>
 
         <div class="input">
-            <label for="content">Mensagem</label>
+            <label for="content">Conteúdo</label>
             <textarea id="content" name="content" rows="5" required></textarea>
         </div>
 
@@ -32,6 +32,24 @@
         </div>
 
         <button type="submit">Salvar Post</button>
+
+        <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+            <a href="{% url 'post_list' %}"
+                style="
+                    text-decoration: none;
+                    color: white;
+                    font-size: 1rem;
+                    width: 100%;
+                    background: black;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 12px 0px;
+                    border-radius: 4px;
+                "
+            >Voltar</a>
+        </div>
     </form>
 
 </div>

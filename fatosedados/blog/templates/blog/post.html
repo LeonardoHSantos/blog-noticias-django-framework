@@ -10,7 +10,7 @@
 
     </div>
 
-    <h1>{{ post.title }}</h1>
+    <h1 style="padding: 25px 0;">{{ post.title }}</h1>
 
     <div class="container-principal">
 
@@ -36,6 +36,22 @@
                 <p>Autor:</p>
                 <p>{{ post.author }}</p>
             </div>
+            
+            <div class="info">
+                
+                {% if user.is_authenticated %}
+                    {% if user.id == post.user_id %}
+                        <div class="post-tools-admin">
+                            <ul>
+                                <li><a href="{% url 'post_edit' post_id=post.id %}">editar</a></li>
+                                <li><a href="{% url 'post_delete' post_id=post.id %}">excluir</a></li>
+                            </ul>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+
+
         </aside>
 
        

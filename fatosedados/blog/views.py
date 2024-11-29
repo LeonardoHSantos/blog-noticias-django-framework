@@ -148,12 +148,14 @@ def termos(request):
 def privacidade(request):
     return render(request, 'termos_privacidade/politica.html')
 
+# Renderiza todos os Posts
 def post_list(request):
     
     posts = Post.objects.all().order_by("-number_of_visitors")
+    
     addtional_images = PostImage.objects.all()
 
-    latest_posts = Post.objects.all()[:3]
+    latest_posts = Post.objects.all().order_by("-created_at")[:3]
     
     return render(request, 'blog/post_list.html', {'posts': posts, 'addtional_images': addtional_images, 'latest_posts': latest_posts})
 
@@ -172,7 +174,8 @@ def create_post(request):
             author=author,
             content=content,
             cover_image=cover_image,
-            created_at=datetime.now()
+            created_at=datetime.now(),
+            user=request.user,
         )
 
         return redirect('post_list')  # Redireciona para uma página de sucesso (deve ser ajustada ao seu projeto)
@@ -192,8 +195,7 @@ def remove_images(old_image_dir):
     except Exception as e:
         print(f"\n\n ERROR REMOVE IMAGES | ERROR: {e}")
         print(f"Diretório: {old_image_dir}")
-    
-
+# ---
 def post_edit(request, post_id):
 
     postFilter = Post.objects.all().filter(id=post_id).first()
@@ -219,8 +221,44 @@ def post_edit(request, post_id):
         
         postFilter.save()
    
-    return render(request, 'blog/post_edit.html', context={"post": postFilter})
+        return render(request, 'blog/post_edit.html', context={"post": postFilter})
     
+    elif request.method == "GET":
+        if postFilter.user.id == request.user.pk:
+            return render(request, 'blog/post_edit.html', context={"post": postFilter})
+        else:
+            return render(request, 'blog/post_edit.html', context={"post": {
+                "no_access_post": True
+            }})
+    else:
+        return JsonResponse({"404": "not-found"})
+# ---
+def post_delete(request, post_id):
+
+    postFilter = Post.objects.all().filter(id=post_id).first()
+    
+    if request.method == "GET":
+        if postFilter.user.id == request.user.pk:
+            return render(request, 'blog/post_delete.html', context={"post": postFilter})
+        else:
+            return render(request, 'blog/post_delete.html', context={"post": {
+                "no_access_post": True
+            }})
+    elif request.method == "POST":
+        print(postFilter)
+        if postFilter.user.id == request.user.pk:
+            postFilter.delete()
+            print(f" --------------------- POST DELETADO COM SUCESSO --------------------- ")
+           
+            return render(request, 'blog/post_delete.html', context={"post": {
+                "delete_success_post": True
+            }})
+        else:
+            return JsonResponse({"error": "Você não tem permissão para deletar este post."}, status=403)
+    
+    else:
+        return JsonResponse({"404": "not-found"})
+
 def post(request, post_id, title_post):
 
     if request.method == "GET":
@@ -229,39 +267,23 @@ def post(request, post_id, title_post):
         postFilter.number_of_visitors += 1
         postFilter.save()
 
+        print(f">>>> postFilter: {postFilter.created_at}")
+
         context={
             "post": {
                 "id": postFilter.pk,
+                "user_id": postFilter.user.id,
                 "title": postFilter.title,
                 "author": postFilter.author,
                 "content": postFilter.content,
-                "cover_image": postFilter.cover_image
+                "cover_image": postFilter.cover_image,
+                "number_of_visitors": postFilter.number_of_visitors,
+                "created_at": postFilter.created_at,
             }
         }
+
+        print(context)
         
         return render(request, 'blog/post.html', context=context)
     else:
         return JsonResponse({"statusCode": 400, "msg": "not found"})
-
-
-# ------------------------------------ REVISAR ESSA ALTERNATIVA ------------------------------------
-# @never_cache
-# def post(request, post_id, title_post):
-#     if request.method == "GET":
-#         # Checa na sessão se o post já foi visualizado
-#         if f"viewed_post_{post_id}" not in request.session:
-#             postFilter = Post.objects.all().filter(id=post_id).first()
-#             postFilter.number_of_visitors += 1
-#             postFilter.save()
-            
-#             # Marca o post como visualizado na sessão
-#             request.session[f"viewed_post_{post_id}"] = True
-
-#         # Pega o post para renderização
-#         postFilter = Post.objects.all().filter(id=post_id).first()
-#         return render(request, 'blog/post.html', context={'post': postFilter})
-    
-#     return JsonResponse({"statusCode": 400, "msg": "not found"})
-
-
-

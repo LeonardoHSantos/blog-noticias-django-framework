@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Excluir Post {% endblock %}
+
+{% block content %}
+<div class="contact-container">
+    
+    {% if post.delete_success_post %}
+        <div class="header-form-success-save">
+            <h1>Post Deletado com Sucesso</h1>
+            <a href="{% url 'post_list' %}">Ir para Posts</a>
+        </div>
+    {% else %}
+        <div class="header-form">
+            <h1>Excluir Post</h1>
+            <!-- <p>Entre em contato conosco preenchendo o formulário abaixo:</p> -->
+        </div>
+        {% if post.no_access_post %}
+            <div style="height: 20vh; display: flex; flex-direction: row; justify-content: center; align-items: center;">
+                <h3>Você não tem permissão para exluir esse Post.</h3>
+            </div>        
+        {% else %}
+            
+            <form action="{% url 'post_delete' post.id %}" method="post" enctype="multipart/form-data" class="contact-form">
+                {% csrf_token %}
+                <div class="input">
+                    <label for="title">Título</label>
+                    <input type="text" id="title" name="title" value="{{ post.title }}" required readonly>
+                </div>
+
+                <div class="input">
+                    <label for="author">Autor</label>
+                    <input type="text" id="author" name="author" value="{{ post.author }}" required readonly>
+                </div>
+
+                <div class="input">
+                    <label for="content">Conteúdo</label>
+                    <textarea id="content" name="content" rows="1" required readonly>{{ post.content }}</textarea>
+                </div>
+
+                {% if post.cover_image %}
+                    <div class="input-image">
+                        <img src="{{ post.cover_image.url }}" alt="Imagem de Capa Atual" style="max-width: 200px; height: auto;">
+                    </div>
+                {% endif %}
+
+                
+
+                <button type="submit" style="background: #ff0047;">Excluir Post</button>
+
+                <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+                    <a href="{% url 'post_list' %}"
+                        style="
+                            text-decoration: none;
+                            color: white;
+                            font-size: 1rem;
+                            width: 100%;
+                            background: black;
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: center;
+                            align-items: center;
+                            padding: 12px 0px;
+                            border-radius: 4px;
+                        "
+                    >Cancelar</a>
+                </div>
+            </form>
+        {% endif %}
+    
+    {% endif %}
+
+</div>
+{% endblock %}
