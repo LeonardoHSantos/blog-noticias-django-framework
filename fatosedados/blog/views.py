@@ -161,7 +161,7 @@ def create_post(request):
         content = request.POST.get('content')
         cover_image = request.FILES.get('cover_image')  # Supondo que o campo de imagem esteja no formulário
 
-        if not all([title, author, content]):
+        if not all([title, author, content, cover_image]):
             return JsonResponse({"statusCode": 400, "msg": "Todos os campos obrigatórios devem ser preenchidos."})
 
         post = Post.objects.create(
@@ -176,8 +176,7 @@ def create_post(request):
         return redirect('post_list')
     
     return render(request, 'blog/create_post.html')
-
-
+# ---
 def remove_images(old_image_dir):
     try:
         # Verifica se o diretório contém imagens e exclui
