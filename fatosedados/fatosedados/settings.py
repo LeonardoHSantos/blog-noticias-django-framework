@@ -15,6 +15,8 @@ if DJANGO_DEBUG == "False" or False:
 
 ALLOWED_HOSTS = ["*"]
 CSRF_TRUSTED_ORIGINS = [
+    "http://http://129.148.59.220",
+    "https://http://129.148.59.220",
     "http://estampaverso.shop", # teste 
     "https://estampaverso.shop" # teste
 ]
