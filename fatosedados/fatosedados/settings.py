@@ -45,7 +45,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'blog.middleware.VerificarURLMiddleware',
-    # 'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'fatosedados.urls'
@@ -72,27 +71,26 @@ WSGI_APPLICATION = 'fatosedados.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-if DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / "db.sqlite3",
-        }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / "db.sqlite3",
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': os.getenv("DB_ENGINE"),
-            'NAME': os.getenv("DB_NAME"),
-            'USER': os.getenv("DB_USER"),
-            'PASSWORD': os.getenv("DB_PASSWORD"),
-            'HOST': os.getenv("DB_HOST"),
-            'PORT': os.getenv("DB_PORT"),
-            'OPTIONS': {
-                'ssl': {'ca': 'us-east-2-bundle.pem'}
-            }
-        }
-    }
+}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': os.getenv("DB_ENGINE"),
+#         'NAME': os.getenv("DB_NAME"),
+#         'USER': os.getenv("DB_USER"),
+#         'PASSWORD': os.getenv("DB_PASSWORD"),
+#         'HOST': os.getenv("DB_HOST"),
+#         'PORT': os.getenv("DB_PORT"),
+#         'OPTIONS': {
+#             'ssl': {'ca': 'us-east-2-bundle.pem'}
+#         }
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

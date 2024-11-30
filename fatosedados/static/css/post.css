@@ -33,7 +33,8 @@
     align-items: flex-start;
     justify-content: center;
     width: 100%;
-    height: 64vh;
+    /* height: 64vh; */
+    height: 130vh;
     margin: 10px 0;
     gap: 4px;
 }
