@@ -13,10 +13,10 @@ DJANGO_DEBUG = os.getenv("DJANGO_DEBUG")
 if DJANGO_DEBUG == "False" or False:
     DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["*", "http://129.148.59.220",]
 CSRF_TRUSTED_ORIGINS = [
-    "http://http://129.148.59.220",
-    "https://http://129.148.59.220",
+    "http://129.148.59.220",
+    "https://129.148.59.220",
     "http://estampaverso.shop", # teste 
     "https://estampaverso.shop" # teste
 ]
