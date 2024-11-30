@@ -11,11 +11,10 @@ from django.contrib.auth import authenticate, login as django_login, logout as d
 from django.contrib.auth.hashers import check_password
 
 def home(request):
-    posts = Post.objects.all().order_by("-number_of_visitors")
-    addtional_images = PostImage.objects.all()
-
-    latest_posts = Post.objects.all()[:3]
-    return render(request, 'blog/post_list.html', {'posts': posts, 'addtional_images': addtional_images, 'latest_posts': latest_posts})
+   posts = Post.objects.all().order_by("-number_of_visitors")[:3]
+   addtional_images = PostImage.objects.all()
+   latest_posts = Post.objects.all().order_by("-created_at")[:3]
+   return render(request, 'blog/home.html', {'posts': posts, 'addtional_images': addtional_images, 'latest_posts': latest_posts})
 
 def contato(request):
     if request.method == "GET":
@@ -164,7 +163,7 @@ def create_post(request):
 
         if not all([title, author, content]):
             return JsonResponse({"statusCode": 400, "msg": "Todos os campos obrigatórios devem ser preenchidos."})
-        
+
         post = Post.objects.create(
             title=title,
             author=author,
