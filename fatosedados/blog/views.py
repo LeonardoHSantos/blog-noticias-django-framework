@@ -10,10 +10,6 @@ from .models import Post, PostImage, Contact, UserRegistration, upload_to_cover
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from django.contrib.auth.hashers import check_password
 
-
-
-
-
 def home(request):
     posts = Post.objects.all().order_by("-number_of_visitors")
     addtional_images = PostImage.objects.all()
@@ -168,7 +164,7 @@ def create_post(request):
 
         if not all([title, author, content]):
             return JsonResponse({"statusCode": 400, "msg": "Todos os campos obrigatórios devem ser preenchidos."})
-
+        
         post = Post.objects.create(
             title=title,
             author=author,
@@ -178,7 +174,7 @@ def create_post(request):
             user=request.user,
         )
 
-        return redirect('post_list')  # Redireciona para uma página de sucesso (deve ser ajustada ao seu projeto)
+        return redirect('post_list')
     
     return render(request, 'blog/create_post.html')
 

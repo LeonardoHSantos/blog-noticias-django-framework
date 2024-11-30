@@ -1,5 +1,4 @@
 from django.urls import path
-from django.conf.urls import handler404
 from django.shortcuts import render
 from . import views
 
@@ -24,12 +23,6 @@ urlpatterns = [
     path('post/edit/<int:post_id>', views.post_edit, name='post_edit'),
     path('post/delete/<int:post_id>', views.post_delete, name='post_delete'),
 ]
-
-
-def custom_404(request, exception):
-    return render(request, '404.html', status=404)
-
-handler404 = custom_404
 
 if not settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
