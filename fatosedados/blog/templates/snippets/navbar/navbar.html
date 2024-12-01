@@ -1,11 +1,28 @@
 {% load static %}
 
 <div class="conatainer-navbar">
+
+    <div class="menu-icon-mobile">
+
+        <div class="logo-menu-mobile">
+            <a href="{% url 'home' %}">Fatos&Dados</a>
+        </div>
+      
+        <ul>
+            <li class="icon-menu-mobile active" data-type="open" onclick="funcMenuMobile(this);">
+                <i class="fa-solid fa-bars"></i>
+            </li>
+            <li class="icon-menu-mobile" data-type="close" onclick="funcMenuMobile(this);">
+                <i class="fa-regular fa-circle-xmark"></i>
+            </li>
+        </ul>
+    </div>
+
     <nav class="navbar">
         
         <ul class="navbar-links">
     
-            <li><a href="{% url 'home' %}">Fatos&Dados</a></li>
+            <li class="logo-menu-desktop"><a href="{% url 'home' %}">Fatos&Dados</a></li>
     
             <li><a href="{% url 'home' %}">Início</a></li>
             <li><a href="{% url 'post_list' %}">Posts</a></li>
@@ -40,3 +57,26 @@
         </div>
     {% endif %}
 </div>
+
+<script>
+    
+    function funcMenuMobile(e){
+        let icons = document.querySelectorAll(".icon-menu-mobile");
+        icons.forEach((el)=>{
+            el.classList.remove("active");
+
+            console.log(el.getAttribute("data-type"), e.getAttribute("data-type"))
+
+            
+            if(el.getAttribute("data-type") != e.getAttribute("data-type")){
+                el.classList.add("active");
+                if(el.getAttribute("data-type") == "open"){
+                    document.querySelector(".navbar").classList.remove("active");
+                } else {
+                    document.querySelector(".navbar").classList.add("active");
+                }
+            }
+        })
+    }
+
+</script>
