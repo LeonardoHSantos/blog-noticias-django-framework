@@ -53,11 +53,8 @@
     font-size: 1.045rem;
     font-weight: 600;
     color: #313127;
-    background-color: white;
 }
-.main-post .content p {
-    padding: 10px;
-}
+
 
 .main-post .info {
     display: flex;

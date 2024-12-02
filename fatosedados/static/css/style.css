@@ -368,7 +368,7 @@ li {
     text-decoration: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
 
     .navbar {
         display: none;
@@ -420,5 +420,86 @@ li {
         padding: 18px 0px;
     }
 
+
+    /* -------------------------- POSTS LATEST NEWS -------------------------- */
+    .post-latest-news .block-title {
+        text-align: center;
+        font-size: 0.74rem;
+        padding: 6px 2px;
+    }
+
+    /* -------------------------- POSTS -------------------------- */
+    .container-posts .post .content-post {
+        flex-direction: column !important;
+    }
+
+    .container-posts .post .content-post .post-datails {
+        width: 100% !important;
+        padding: 0 !important;
+    }
     
+    .container-posts .post .content-post .post-image {
+        width: 100% !important;
+        height: 39vh !important;
+    }
+
+    .container-posts .post .content-post .post-content {
+        font-size: 1.155rem !important;
+    }
+    .container-posts .post .content-post .post-datails h2 {
+        font-size: 1.35rem;
+    }
+
+    .container-posts .post .content-post .post-datails .title-mini-post {
+        font-size: 0.955rem !important;
+    }
+    .post-content.mini-post {
+        font-size: 0.955rem !important;
+    }
+
+}
+
+
+
+@media (max-width: 768px) {
+    .container-principal {
+        flex-direction: column !important;
+    }
+    .post-latest-news, .post-adsen,
+    .main-posts,
+    .post-latest-news, .post-adsense {
+        width: 100% !important;
+        position: relative !important;
+    }
+    .post-latest-news, .post-adsense {
+        margin: 0 !important;
+        padding: 0 !important;
+        top: 0 !important;
+    }
+    .post-latest-news .latest-news, .post-adsense .adsense {
+        width: 95vw !important;
+    }
+    
+    .container-posts {
+        width: 95vw !important;
+    }
+
+    
+
+}
+
+@media (max-width: 600px) {
+    .home-title {
+        font-size: 1.2rem;
+    }
+    .contact-form {
+        width: 75vw;
+        max-width: 100%;
+    }
+    
+    .post-latest-news .container-posts {
+        border: 1px solid #d0d1d9;
+        padding: 3px;
+        border-radius: 4px;
+    }
 }

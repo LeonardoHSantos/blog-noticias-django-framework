@@ -32,7 +32,6 @@
     border: 0;
     border-radius: 0;
     border-bottom: 1px solid rgb(128, 129, 124);
-    background-color: white;
 }
 .container-posts .post a {
     color: black;
@@ -53,7 +52,7 @@
     justify-content: center;
     align-items: center;
     width: 45%;
-    height: 14vw;
+    height: 36vh;
 }
 .container-posts .post .content-post .post-image img {
     width: 100%;
@@ -99,8 +98,6 @@
     position: sticky;
     top: 84px;
     margin-top: 10px;
-    background-color: white;
-    /* background-color: yellow; */
     /* box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px; */
     
 }
