@@ -440,7 +440,8 @@ li {
     
     .container-posts .post .content-post .post-image {
         width: 100% !important;
-        height: 39vh !important;
+        height: 68vh !important;
+        max-height: 100% !important;
     }
 
     .container-posts .post .content-post .post-content {
@@ -457,6 +458,12 @@ li {
         font-size: 0.955rem !important;
     }
 
+    .main-posts {
+        align-items: center !important;
+    }
+    .container-posts .post {
+        padding: 0 !important;
+    }
 }
 
 
@@ -484,14 +491,36 @@ li {
         width: 95vw !important;
     }
 
-    
+    /* ---------------- POST ---------------- */
+    .main-post {
+        width: 100% !important;
+        align-items: center !important;
+    }
+    .main-post .post-image {
+        width: 95vw !important;
+        height: 90vh !important;
+    }
+    .main-post .content {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    .main-post .content p,
+    .main-post .info {
+        width: 95vw;
+        font-size: 0.74rem;
+        flex-wrap: wrap;
+    }
 
 }
 
 @media (max-width: 600px) {
-    .home-title {
+    .principal-title {
         font-size: 1.2rem;
+        padding: 24px 4px !important;
     }
+    
     .contact-form {
         width: 75vw;
         max-width: 100%;
@@ -501,5 +530,9 @@ li {
         border: 1px solid #d0d1d9;
         padding: 3px;
         border-radius: 4px;
+    }
+    
+    .post-latest-news .container-posts .post .content-post .post-image {
+        max-height: 33vh !important;
     }
 }
