@@ -52,6 +52,7 @@
     {% if user.is_authenticated %}
         <div class="tools">
             <ul>
+                <li><a href="{% url 'post_mertics' %}">Painel</a></li>
                 <li><a href="{% url 'create_post' %}">Novo Post</a></li>
             </ul>
         </div>
@@ -64,10 +65,6 @@
         let icons = document.querySelectorAll(".icon-menu-mobile");
         icons.forEach((el)=>{
             el.classList.remove("active");
-
-            console.log(el.getAttribute("data-type"), e.getAttribute("data-type"))
-
-            
             if(el.getAttribute("data-type") != e.getAttribute("data-type")){
                 el.classList.add("active");
                 if(el.getAttribute("data-type") == "open"){

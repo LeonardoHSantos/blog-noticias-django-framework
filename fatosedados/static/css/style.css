@@ -118,6 +118,13 @@ li {
 }
 .conatainer-navbar .tools ul {
     padding: 10px 51px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 .conatainer-navbar .tools ul li a {
     text-decoration: none;

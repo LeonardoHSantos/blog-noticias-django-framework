@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Painel - Métricas de Posts {% endblock %}
+{% block content %}
+
+<h1 class="principal-title" style="margin: 14px 0;"> Bem vindo(a) as métricas dos Posts </h1>
+
+<div class="container-principal">
+    
+    <main class="painel-metrics-posts">
+        <div class="chart">
+          <canvas id="myChart"></canvas>
+        </div>
+        <div class="chart">
+          
+        </div>
+    </main>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+
+
+
+// Função para gerar números aleatórios no intervalo definido
+function generateRandomNumbers(config) {
+  const { count, min, max } = config;
+  const numbers = [];
+  for (let i = 0; i < count; i++) {
+    numbers.push(Math.floor(Math.random() * (max - min + 1)) + min);
+  }
+  return numbers;
+}
+
+// Função para gerar a cor transparente
+function transparentize(color, opacity) {
+  return `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${opacity})`;
+}
+
+// Definindo as cores diretamente em formato RGB
+const CHART_COLORS = {
+  black: [0, 0, 0],
+  blue: [54, 162, 235]
+};
+
+let url = "{% url 'post_metrics_ranking_top_5' %}";
+
+fetch(url, {
+  method: "GET",
+  headers: {},
+})
+.then((response) => response.json())
+.then((response) => {
+
+  const labels = response.titles;
+  const data = {
+    labels: labels,
+    datasets: [
+      {
+        label: 'Total de Visitantes',
+        data: response.numbers_of_visitors,
+        borderColor: `rgb(${CHART_COLORS.black.join(",")})`,
+        backgroundColor: transparentize(CHART_COLORS.black, 0.5),
+      },
+    ]
+  };
+  
+  const ctx = document.getElementById('myChart');
+  const label_slice = 8;
+
+  new Chart(ctx, {
+    type: 'line',
+    data: data,
+    options: {
+      plugins: {
+        title: {
+          display: true,
+          text: 'Rank Top 5 - Mais Acessados',
+          color: 'black',
+          font: {
+            size: 16
+          }
+        }
+      },
+      scales: {
+        x: {
+          ticks: {
+            callback: function(val, index){
+
+              let value = this.getLabelForValue(val);
+              let lable_tt = value.length;
+              return lable_tt >= label_slice ? value.slice(0,label_slice) : value
+              
+            }
+          }
+        },
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+
+  // const ctx = document.getElementById('myChart');
+  // const data = {
+  //   labels: labels,
+  //   datasets: [
+  //     {
+  //       label: 'Dataset 1',
+  //       data: response.numbers_of_visitors,
+  //       backgroundColor: transparentize(CHART_COLORS.black, 0.5),
+  //     }
+  //   ]
+  // };
+  // const config = {
+  //   type: 'doughnut',
+  //   data: data,
+  //   options: {
+  //     responsive: true,
+  //     plugins: {
+  //       legend: {
+  //         position: 'top',
+  //       },
+  //       title: {
+  //         display: true,
+  //         text: 'Chart.js Doughnut Chart'
+  //       }
+  //     }
+  //   },
+  // };
+  // new Chart(ctx, config);
+
+
+});
+
+
+
+</script>
+
+{% endblock %}
+

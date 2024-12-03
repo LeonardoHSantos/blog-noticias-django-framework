@@ -22,6 +22,12 @@ urlpatterns = [
     path('blog/post/create/', views.create_post, name='create_post'),
     path('blog/post/edit/<int:post_id>', views.post_edit, name='post_edit'),
     path('blog/post/delete/<int:post_id>', views.post_delete, name='post_delete'),
+
+    # ----------- PAINEL - POST METRICS -----------
+    path('blog/post-mertics/', views.post_mertics, name='post_mertics'),
+
+    # ----------- API PAINEL - POST METRICS -----------
+    path('api/post-mertics/post-metrics-ranking-top-5/', views.post_metrics_ranking_top_5, name='post_metrics_ranking_top_5'),
 ]
 
 if not settings.DEBUG:

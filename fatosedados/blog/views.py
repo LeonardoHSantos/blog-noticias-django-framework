@@ -134,8 +134,6 @@ def register(request):
     else:
         return JsonResponse({"statusCode": 400, "msg": "not found"})
         
-    
-
 
 def termos(request):
     return render(request, 'termos_privacidade/termos.html')
@@ -281,3 +279,21 @@ def post(request, post_id, title_post):
         return render(request, 'blog/post.html', context=context)
     else:
         return JsonResponse({"statusCode": 400, "msg": "not found"})
+
+
+# -------------------- DASHBOARD - POST METRICS --------------------
+def post_mertics(request):
+    if request.method == "GET":
+        return render(request, "metrics/post_metrics.html")
+
+def post_metrics_ranking_top_5(request):
+    if request.method == "GET":
+        posts = Post.objects.all().order_by("-number_of_visitors")[:5]
+        
+        titles              = list(map(lambda x: x.title, posts ))
+        numbers_of_visitors = list(map(lambda x: x.number_of_visitors, posts ))
+        
+        return JsonResponse({
+            "titles": titles,
+            "numbers_of_visitors": numbers_of_visitors,
+        })
