@@ -8,12 +8,23 @@
 <div class="container-principal">
     
     <main class="painel-metrics-posts">
-        <div class="chart">
-          <canvas id="myChart"></canvas>
+
+        <div class="block-chart">
+          <div class="chart">
+            <canvas id="chart-01"></canvas>
+          </div>
+
+          <div class="chart">
+            <canvas id="chart-02"></canvas>
+          </div>
         </div>
-        <div class="chart">
-          
+
+        <div class="block-chart">
+          <div class="chart">
+            <canvas id="chart-03"></canvas>
+          </div>
         </div>
+       
     </main>
 
 </div>
@@ -24,60 +35,43 @@
 
 Chart.register(ChartDataLabels);
 
-// Função para gerar números aleatórios no intervalo definido
-function generateRandomNumbers(config) {
-  const { count, min, max } = config;
-  const numbers = [];
-  for (let i = 0; i < count; i++) {
-    numbers.push(Math.floor(Math.random() * (max - min + 1)) + min);
-  }
-  return numbers;
-}
-
-// Função para gerar a cor transparente
-function transparentize(color, opacity) {
-  return `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${opacity})`;
-}
-
 // Definindo as cores diretamente em formato RGB
 const CHART_COLORS = {
   black: [0, 0, 0],
   blue: [54, 162, 235]
 };
+// Função para gerar a cor transparente
+function transparentize(color, opacity) {
+  return `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${opacity})`;
+}
 
-let url = "{% url 'post_metrics_ranking_top_5' %}";
+function Chart_01(data){
 
-fetch(url, {
-  method: "GET",
-  headers: {},
-})
-.then((response) => response.json())
-.then((response) => {
-
-  const labels = response.titles;
-  const data = {
+  const metrics_chart = data["data_months"];
+  const labels = metrics_chart.labels;
+  const data_chart = {
     labels: labels,
     datasets: [
       {
         label: 'Total de Visitantes',
-        data: response.numbers_of_visitors,
+        data: metrics_chart.values,
         borderColor: `rgb(${CHART_COLORS.black.join(",")})`,
         backgroundColor: transparentize(CHART_COLORS.black, 0.5),
       },
     ]
   };
   
-  const ctx = document.getElementById('myChart');
+  const ctx = document.getElementById('chart-01');
   const label_slice = 8;
 
   new Chart(ctx, {
     type: 'line',
-    data: data,
+    data: data_chart,
     options: {
       plugins: {
         title: {
           display: true,
-          text: 'Rank Top 5 - Mais Acessados',
+          text: 'Relatório de Visualizações - Mensal',
           color: 'black',
           font: {
             size: 16
@@ -109,36 +103,137 @@ fetch(url, {
       }
     }
   });
+}
+function Chart_02(data){
+
+  const metrics_chart = data["data_days"];
+  const labels = metrics_chart.labels;
+  const data_chart = {
+    labels: labels,
+    datasets: [
+      {
+        label: 'Total de Visitantes',
+        data: metrics_chart.values,
+        borderColor: `#0041ff`,
+        backgroundColor:'#0041ff',
+      },
+    ]
+  };
+  
+  const ctx = document.getElementById('chart-02');
+  const label_slice = 8;
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: data_chart,
+    options: {
+      plugins: {
+        title: {
+          display: true,
+          text: 'Relatório de Visualizações - Dia',
+          color: 'black',
+          font: {
+            size: 16
+          }
+        },
+        datalabels: { 
+          anchor: 'end', 
+          align: 'top', 
+          formatter: (value, context) => { 
+            return value; 
+          } 
+        }
+      },
+      scales: {
+        x: {
+          ticks: {
+            callback: function(val, index){
+
+              let value = this.getLabelForValue(val);
+              let lable_tt = value.length;
+              return lable_tt >= label_slice ? value.slice(0,label_slice) : value
+            }
+          }
+        },
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}
+function Chart_03(data){
+
+  const metrics_chart = data["data_rank_top_5"];
+  const labels = metrics_chart.labels;
+  const data_chart = {
+    labels: labels,
+    datasets: [
+      {
+        label: 'Total de Visitantes',
+        data: metrics_chart.values,
+        borderColor: `#0041ff`,
+        backgroundColor:'#0041ff',
+      },
+    ]
+  };
+  
+  const ctx = document.getElementById('chart-03');
+  const label_slice = 8;
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: data_chart,
+    options: {
+      plugins: {
+        title: {
+          display: true,
+          text: 'Rank - 5 Posts Mais Acessados',
+          color: 'black',
+          font: {
+            size: 16
+          }
+        },
+        datalabels: { 
+          anchor: 'end', 
+          align: 'top', 
+          formatter: (value, context) => { 
+            return value; 
+          } 
+        }
+      },
+      scales: {
+        x: {
+          ticks: {
+            callback: function(val, index){
+
+              let value = this.getLabelForValue(val);
+              let lable_tt = value.length;
+              return lable_tt >= label_slice ? value.slice(0,label_slice) : value
+            }
+          }
+        },
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}
 
 
-  // const ctx = document.getElementById('myChart');
-  // const data = {
-  //   labels: labels,
-  //   datasets: [
-  //     {
-  //       label: 'Dataset 1',
-  //       data: response.numbers_of_visitors,
-  //       backgroundColor: transparentize(CHART_COLORS.black, 0.5),
-  //     }
-  //   ]
-  // };
-  // const config = {
-  //   type: 'doughnut',
-  //   data: data,
-  //   options: {
-  //     responsive: true,
-  //     plugins: {
-  //       legend: {
-  //         position: 'top',
-  //       },
-  //       title: {
-  //         display: true,
-  //         text: 'Chart.js Doughnut Chart'
-  //       }
-  //     }
-  //   },
-  // };
-  // new Chart(ctx, config);
+let url = "{% url 'api_post_metrics' %}";
+fetch(url, {
+  method: "GET",
+  headers: {},
+})
+.then((response) => response.json())
+.then((response) => {
+
+  Chart_01(response);
+  Chart_02(response);
+  Chart_03(response);
+
 
 
 });

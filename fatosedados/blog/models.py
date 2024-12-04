@@ -117,3 +117,17 @@ class PostImage(models.Model):
 
     def __str__(self):
         return f"Imagem para {self.post.title}"
+
+
+
+# ------------------------ PAINEL -POST  METRICS------------------------
+class PostMetrics(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='metrics')
+    access_datetime = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        verbose_name = "Post Metric"
+        verbose_name_plural = "Posts Metrics"
+
+    def __str__(self):
+        return f"Metric for {self.post.title} on {self.access_datetime}"

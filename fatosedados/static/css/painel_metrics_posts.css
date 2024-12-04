@@ -1,11 +1,13 @@
 .painel-metrics-posts,
-.painel-metrics-posts .chart {
+.painel-metrics-posts .block-chart,
+.painel-metrics-posts .block-chart .chart {
     width: 100%;
-    height: 65vh;
+    /* height: 65vh; */
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 .painel-metrics-posts {
     padding: 10px;
@@ -14,7 +16,11 @@
     gap: 10px;
 }
 
-.painel-metrics-posts .chart {
+.painel-metrics-posts .block-chart {
+    gap: 10px;
+    width: 90vw;
+}
+.painel-metrics-posts .block-chart .chart {
     width: 44vw;
     height: 300px;
     background: white;
@@ -26,17 +32,23 @@
         padding: 0;
         flex-direction: column;
         align-items: center;
+        justify-content: flex-start;
+    }
+    .painel-metrics-posts .block-chart {
         justify-content: center;
     }
-    .painel-metrics-posts .chart {
+    .painel-metrics-posts .block-chart .chart {
         width: 95vw;
-        height: 60vh;
+    }
+    .painel-metrics-posts,
+    .painel-metrics-posts .block-chart .chart {
+        height: 100% !important;
     }
 
 }
 @media (max-width: 600px) {
-    .painel-metrics-posts .chart {
-        width: 95vw;
+    .painel-metrics-posts .block-chart .chart {
+        width: 85vw;
         height: 38vh;
         background: white;
     }

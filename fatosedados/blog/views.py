@@ -4,11 +4,14 @@ from datetime import datetime
 
 from django.shortcuts import render, redirect
 from django.http.response import JsonResponse
-# from django.contrib.auth.models import User
-# from django.views.decorators.cache import never_cache
-from .models import Post, PostImage, Contact, UserRegistration, upload_to_cover
+
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from django.contrib.auth.hashers import check_password
+from django.contrib.auth.decorators import login_required
+
+from .models import Post, PostImage, Contact, UserRegistration, upload_to_cover, PostMetrics
+from .utils import PrepareDataToMetrics
+
 
 def home(request):
    posts = Post.objects.all().order_by("-number_of_visitors")[:3]
@@ -259,7 +262,11 @@ def post(request, post_id, title_post):
         postFilter.number_of_visitors += 1
         postFilter.save()
 
+        metric = PostMetrics.objects.create(post=postFilter)
+        metric.save()
+        
         print(f">>>> postFilter: {postFilter.created_at}")
+        print(f">>>> metric: {metric}")
 
         context={
             "post": {
@@ -274,26 +281,34 @@ def post(request, post_id, title_post):
             }
         }
 
-        print(context)
-        
         return render(request, 'blog/post.html', context=context)
     else:
         return JsonResponse({"statusCode": 400, "msg": "not found"})
 
 
 # -------------------- DASHBOARD - POST METRICS --------------------
+
+@login_required(login_url='/login/')
 def post_mertics(request):
     if request.method == "GET":
         return render(request, "metrics/post_metrics.html")
 
-def post_metrics_ranking_top_5(request):
+
+def api_post_metrics(request):
     if request.method == "GET":
+
+        user = request.user
+        post = Post.objects.filter(user=user)
+        metrics = PostMetrics.objects.filter(post__in=post)
+
         posts = Post.objects.all().order_by("-number_of_visitors")[:5]
-        
         titles              = list(map(lambda x: x.title, posts ))
         numbers_of_visitors = list(map(lambda x: x.number_of_visitors, posts ))
+
+        API = PrepareDataToMetrics()
+        metrics_chart = API.convert_queryObject_to_dataframe(data=metrics)
+
         
-        return JsonResponse({
-            "titles": titles,
-            "numbers_of_visitors": numbers_of_visitors,
-        })
+        return JsonResponse(
+            metrics_chart
+        )
