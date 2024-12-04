@@ -48,7 +48,7 @@
 }
 @media (max-width: 600px) {
     .painel-metrics-posts .block-chart .chart {
-        width: 85vw;
+        width: 95vw;
         height: 38vh;
         background: white;
     }
