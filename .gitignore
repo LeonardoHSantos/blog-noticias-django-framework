@@ -4,5 +4,5 @@ __pycache__
 *.json
 *.pem
 .env
-.sqlite3
+.db.sqlite3
 test.py

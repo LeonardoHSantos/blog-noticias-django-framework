@@ -3,12 +3,11 @@ import json
 import pandas as pd
 
 
-METRICS_MONTHS = json.loads(os.getenv("METRICS_MONTHS"))
-METRICS_DAYS = list(range(1, 32))
-
 class PrepareDataToMetrics:
     def __init__(self):
         api = None
+        self.METRICS_DAYS = list(range(1, 32))
+        self.METRICS_MONTHS = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
     
     def convert_queryObject_to_dataframe(self, data):
 
@@ -27,43 +26,56 @@ class PrepareDataToMetrics:
         df = pd.DataFrame.from_dict(metrics)
         df["year"]  = df["post_access_datetime"].dt.year
         df["month"] = df["post_access_datetime"].dt.month
-        df["month_name"] = df["month"].apply(lambda x: METRICS_MONTHS[x - 1])
+        df["month_name"] = df["month"].apply(lambda x: self.METRICS_MONTHS[x - 1])
         df["day"]   = df["post_access_datetime"].dt.day
 
         metrics_chart = {
-            "data_months": {
-                "labels": METRICS_MONTHS,
-                "values": list(map( lambda x: len(df[df["month_name"] ==  x].values) , METRICS_MONTHS ))
-            },
-            "data_days": {
-                "labels": METRICS_DAYS,
-                "values": list(map( lambda x: len(df[df["day"] ==  x].values) , METRICS_DAYS ))
-            },
+            "data_months": self.create_metric_month(df=df),
+            "data_days": self.create_metric_day(df=df),
             "data_rank_top_5": self.create_metric_rank_access_posts(df=df)
         }
-
-        #  -------------------------------- 
-
-
-        print(df)
-        print(df.info())
-        print(metrics_chart)
-
         return metrics_chart
     
+    def create_metric_month(self, df):
+        try:
+            data = {
+                "labels": self.METRICS_MONTHS,
+                "values": list(map( lambda x: len(df[df["month_name"] ==  x].values) , self.METRICS_MONTHS ))
+            }
+            return data
+        except Exception as e:
+            print(f"\n ### ERROR CREATE METRIC MONTH | ERROR: {e} ")
+            return None
+    
+    def create_metric_day(self, df):
+        try:
+            data = {
+                "labels": self.METRICS_DAYS,
+                "values": list(map( lambda x: len(df[df["day"] ==  x].values) , self.METRICS_DAYS ))
+            }
+            return data
+        except Exception as e:
+            print(f"\n ### ERROR CREATE METRIC DAY | ERROR: {e} ")
+            return None
+    
     def create_metric_rank_access_posts(self, df: pd.DataFrame):
-        df_visist_posts = df.groupby('post_title').agg(
-            post_id=('post_id', 'first'),
-            number_of_access=('post_title', 'count')  # Conta as ocorrências
-        ).reset_index()
+        try:
+            df_visist_posts = df.groupby('post_title').agg(
+                post_id=('post_id', 'first'),
+                number_of_access=('post_title', 'count')  # Conta as ocorrências
+            ).reset_index()
 
-        df_visist_posts.sort_values(by=["number_of_access"], ascending=False, inplace=True)
-        df_visist_posts = df_visist_posts.nlargest(5, 'number_of_access')
-        data = {
-            "labels": list(df_visist_posts["post_title"].values),
-            "values": list(map( lambda x: int(x), df_visist_posts["number_of_access"].values)),
-        }
+            df_visist_posts.sort_values(by=["number_of_access"], ascending=False, inplace=True)
+            df_visist_posts = df_visist_posts.nlargest(5, 'number_of_access')
+            data = {
+                "labels": list(df_visist_posts["post_title"].values),
+                "values": list(map( lambda x: int(x), df_visist_posts["number_of_access"].values)),
+            }
 
-        return data
+            return data
+        except Exception as e:
+            print(f"\n ### ERROR CREATE METRIC RANK ACCESS | ERROR: {e} ")
+            return None
+
 
     

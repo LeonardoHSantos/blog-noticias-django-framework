@@ -67,6 +67,7 @@ function Chart_01(data){
   new Chart(ctx, {
     type: 'line',
     data: data_chart,
+    responsive: true,
     options: {
       plugins: {
         title: {
@@ -104,28 +105,54 @@ function Chart_01(data){
     }
   });
 }
-function Chart_02(data){
+
+function Chart_02(data) {
 
   const metrics_chart = data["data_days"];
   const labels = metrics_chart.labels;
+  const values = metrics_chart.values;
+
+  // Calcular a média
+  const average = values.reduce((sum, value) => sum + value, 0) / values.length;
+
+  // Gerar um array com o valor da média para todas as posições (para desenhar a linha)
+  const averageValues = new Array(values.length).fill(average);
+
   const data_chart = {
     labels: labels,
     datasets: [
       {
         label: 'Total de Visitantes',
-        data: metrics_chart.values,
-        borderColor: `#0041ff`,
-        backgroundColor:'#0041ff',
+        data: values,
+        borderColor: `black`,
+        backgroundColor: 'black',
+        fill: false, // Não preenche a área sob a linha
+        tension: 0.1 // Suaviza a linha
       },
+      {
+        label: 'Média de Visitantes',
+        data: averageValues, // Array de valores de média
+        borderColor: 'orange', // Cor da linha de média
+        backgroundColor: 'orange',
+        borderWidth: 2, // Largura da linha de média
+        // borderDash: [5, 5], // Linha tracejada
+        fill: false, // Não preenche a área
+        tension: 0.1, // Suaviza a linha,
+        pointRadius: 1.5,
+        datalabels: {
+          display: false // Desativa os rótulos de dados para a linha de média
+        }
+      }
     ]
   };
-  
+
   const ctx = document.getElementById('chart-02');
   const label_slice = 8;
 
   new Chart(ctx, {
-    type: 'bar',
+    type: 'line',
     data: data_chart,
+    responsive: true,
     options: {
       plugins: {
         title: {
@@ -148,10 +175,9 @@ function Chart_02(data){
         x: {
           ticks: {
             callback: function(val, index){
-
               let value = this.getLabelForValue(val);
-              let lable_tt = value.length;
-              return lable_tt >= label_slice ? value.slice(0,label_slice) : value
+              let label_tt = value.length;
+              return label_tt >= label_slice ? value.slice(0, label_slice) : value;
             }
           }
         },
@@ -162,6 +188,7 @@ function Chart_02(data){
     }
   });
 }
+
 function Chart_03(data){
 
   const metrics_chart = data["data_rank_top_5"];
@@ -179,12 +206,14 @@ function Chart_03(data){
   };
   
   const ctx = document.getElementById('chart-03');
-  const label_slice = 8;
+  const label_slice = 12;
 
   new Chart(ctx, {
     type: 'bar',
     data: data_chart,
+    responsive: true,
     options: {
+      indexAxis: 'y',
       plugins: {
         title: {
           display: true,
@@ -203,17 +232,17 @@ function Chart_03(data){
         }
       },
       scales: {
-        x: {
+        y: {
           ticks: {
             callback: function(val, index){
 
               let value = this.getLabelForValue(val);
               let lable_tt = value.length;
-              return lable_tt >= label_slice ? value.slice(0,label_slice) : value
+              return lable_tt >= label_slice ? value.slice(0,label_slice) + "..." : value
             }
           }
         },
-        y: {
+        x: {
           beginAtZero: true
         }
       }

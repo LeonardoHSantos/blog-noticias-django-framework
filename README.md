@@ -18,6 +18,10 @@ O blog possui as seguintes funcionalidades principais:
 * **`post_edit`:** Permite que usuários editem seus próprios posts.
 * **`post_delete`:** Permite que usuários excluam seus próprios posts.
 * **`post`:** Exibe um post específico, com seu título, autor, conteúdo e imagem.
+* **`post_mertics`:** Exibe as métricas de acessos.
+
+**Funcionalidades da API:**
+* **`api_post_metrics`:** Gera os relatórios de quantidades de acessos por dia, mês e rank com os 5 Posts mais acessados.
 
 **Outras funcionalidades:**
 

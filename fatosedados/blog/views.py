@@ -1,6 +1,7 @@
 import os
 import re
-from datetime import datetime
+import random
+from datetime import datetime, timedelta
 
 from django.shortcuts import render, redirect
 from django.http.response import JsonResponse
@@ -293,22 +294,17 @@ def post_mertics(request):
     if request.method == "GET":
         return render(request, "metrics/post_metrics.html")
 
-
 def api_post_metrics(request):
-    if request.method == "GET":
 
+    # Trocar para método POST quando iniciar os filtros para os relatórios.
+    if request.method == "GET":
         user = request.user
         post = Post.objects.filter(user=user)
         metrics = PostMetrics.objects.filter(post__in=post)
 
-        posts = Post.objects.all().order_by("-number_of_visitors")[:5]
-        titles              = list(map(lambda x: x.title, posts ))
-        numbers_of_visitors = list(map(lambda x: x.number_of_visitors, posts ))
-
         API = PrepareDataToMetrics()
         metrics_chart = API.convert_queryObject_to_dataframe(data=metrics)
 
-        
         return JsonResponse(
             metrics_chart
         )
