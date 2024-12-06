@@ -133,6 +133,7 @@
 
     function postShare(e){
         if (navigator.share) {
+            navigator = navigator.share.bind(navigator);
             navigator.share({
             title: 'Compartilhe meu artigo',
             text: 'Confira este artigo incrível!',
