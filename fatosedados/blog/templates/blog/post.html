@@ -35,7 +35,7 @@
                         <i class="fa-regular fa-comment comment developing"></i>
                     </div>
                     <div class="action">
-                        <i class="fa-solid fa-share-nodes share developing"></i>
+                        <i class="fa-solid fa-share-nodes share" onclick="postShare(this);"></i>
                     </div>
                 </div>
             </div>
@@ -96,18 +96,11 @@
         }
 
         if (e.classList.contains("liked")){
-            console.log("curtido")
             data.action = "dislike";
             
         } else {
             data.action = "liked";
         }
-
-        console.log(`
-            post_id: ${post_id}
-            urlPostLike: ${urlPostLike}
-            csrftoekn: ${csrftoekn}
-        `)
 
         fetch(urlPostLike, {
             method: "post",
@@ -135,5 +128,23 @@
         });
     }
 </script>
+
+<script>
+
+    function postShare(e){
+        if (navigator.share) {
+            navigator.share({
+            title: 'Compartilhe meu artigo',
+            text: 'Confira este artigo incrível!',
+            url: window.location.href
+            })
+            .then(() => console.log('Conteúdo compartilhado com sucesso'))
+            .catch((error) => console.error('Erro ao compartilhar:', error));
+        } else {
+            console.log('A API Navigator.share() não é suportada neste navegador.');
+        }
+    };
+</script>
+
 
 {% endblock %}
