@@ -120,6 +120,21 @@ class PostImage(models.Model):
 
 
 
+# ------------------------ Like and Comment - POST ------------------------
+class Like(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='likes')
+    action = models.CharField(default="", max_length=7)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+class Comment(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+
+
 # ------------------------ PAINEL -POST  METRICS------------------------
 class PostMetrics(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='metrics')

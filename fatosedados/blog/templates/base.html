@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/posts.css' %}">
     <link rel="stylesheet" href="{% static 'css/post.css' %}">
+    <link rel="stylesheet" href="{% static 'css/popups.css' %}">
     
     <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
@@ -27,3 +28,18 @@
     {% include 'snippets/footer/footer.html' %}
 </body>
 </html>
+
+
+<script>
+    function popupShow(){
+        const container_popup = document.querySelector(".container-popup");
+        window.scroll(0,0);
+        container_popup.classList.add("active");
+        document.body.style.overflow = "hidden";
+    }
+    function popupClose(){
+        const container_popup = document.querySelector(".container-popup");
+        document.body.style.overflow = "scroll";
+        container_popup.classList.remove("active");
+    }
+</script>

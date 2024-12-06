@@ -1,16 +1,16 @@
 import os
 import re
-import random
-from datetime import datetime, timedelta
+import json
+from datetime import datetime
 
 from django.shortcuts import render, redirect
 from django.http.response import JsonResponse
 
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
-from django.contrib.auth.hashers import check_password
 from django.contrib.auth.decorators import login_required
 
-from .models import Post, PostImage, Contact, UserRegistration, upload_to_cover, PostMetrics
+from .models import Post, PostImage, Contact, UserRegistration, PostMetrics
+from .models import Like, Comment
 from .utils import PrepareDataToMetrics
 
 
@@ -269,6 +269,17 @@ def post(request, post_id, title_post):
         print(f">>>> postFilter: {postFilter.created_at}")
         print(f">>>> metric: {metric}")
 
+        post_like = False
+        try:
+            if not request.user.id:
+                check_like = Like.objects.filter(user=request.user, post=postFilter)
+                if len(check_like) >= 1:
+                    if check_like.last().action == "liked":
+                        post_like = True
+        except:
+            post_like = False
+
+
         context={
             "post": {
                 "id": postFilter.pk,
@@ -279,6 +290,7 @@ def post(request, post_id, title_post):
                 "cover_image": postFilter.cover_image,
                 "number_of_visitors": postFilter.number_of_visitors,
                 "created_at": postFilter.created_at,
+                "post_like": post_like,
             }
         }
 
@@ -286,16 +298,35 @@ def post(request, post_id, title_post):
     else:
         return JsonResponse({"statusCode": 400, "msg": "not found"})
 
-
-# -------------------- DASHBOARD - POST METRICS --------------------
-
 @login_required(login_url='/login/')
 def post_mertics(request):
     if request.method == "GET":
         return render(request, "metrics/post_metrics.html")
 
-def api_post_metrics(request):
+# ------------------------------------------- APIs -------------------------------------------
 
+def login_api_v1(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        print(data)
+        email = data["email"]
+        password = data["password"]
+        
+        if email == "" or password == "":
+            return JsonResponse({"code": 404, "message": "Preencha todos os campos."})
+        
+
+        user = authenticate(request, username=email, password=password)
+        if user is not None:
+            django_login(request, user)
+            return JsonResponse({"code": 200, "message": "Autenticado com sucesso!"})
+        else:
+            return JsonResponse({"code": 404, "message": "Usuário ou senha incorretos."})
+        
+    return JsonResponse({"code": 400, "message": "bad request"})
+           
+            
+def api_post_metrics(request):
     # Trocar para método POST quando iniciar os filtros para os relatórios.
     if request.method == "GET":
         user = request.user
@@ -308,3 +339,36 @@ def api_post_metrics(request):
         return JsonResponse(
             metrics_chart
         )
+
+# -- POST - LIKE and COMMENT --
+
+# @login_required
+def api_post_like(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        print(data)
+
+        post_id = data.get("post_id")
+        action = data.get("action")
+        post = Post.objects.filter(pk=post_id).first()
+
+        if not post_id:
+            return JsonResponse({"code": 500, "msg": "Post não encontrado"})
+        if not request.user.id or not post_id:
+            return JsonResponse({"code": 404, "msg": "Entre na sua conta para curtir e comentar."})
+        if action not in ["liked", "dislike"]:
+            return JsonResponse({"code": 500, "msg": "error"})
+
+        try:
+            Like.objects.create(user=request.user, post=post, action=action)
+            return JsonResponse({
+                "code": 200, "msg": "success", "action": action
+            })
+        except Exception as e:
+            print(f"\n ERROR ACTION POST | ERROR: {e}")
+            return JsonResponse({
+                "code": 400, "msg": f"error: {str(e)}"
+            })
+    return JsonResponse({
+        "code": 404, "msg": "page not found"
+    })

@@ -12,6 +12,10 @@
 
     <h1 class="principal-title" style="padding: 25px 0;">{{ post.title }}</h1>
 
+    <div class="container-popup">
+        {% include 'snippets/popups/login.html' %}
+    </div>
+
     <div class="container-principal">
 
         <aside class="main-post">
@@ -19,6 +23,21 @@
             <div class="post-image">
                 <img src="{{ post.cover_image.url }}" alt="{{ post.cover_image.url }}">
                 <p class="font-image">Fonte: imagem criada com auxílio de IA, por Leonardo H Santos</p>
+                <div class="post-actions">
+                    <div class="action">
+                        {% if post.post_like %}
+                            <i class="fa-regular fa-heart like liked" data-action="{{ post.id }}" onclick="postLike(this);"></i>
+                        {% else %}
+                            <i class="fa-regular fa-heart like" data-action="{{ post.id }}" onclick="postLike(this);"></i>
+                        {% endif %}
+                    </div>
+                    <div class="action">
+                        <i class="fa-regular fa-comment comment developing"></i>
+                    </div>
+                    <div class="action">
+                        <i class="fa-solid fa-share-nodes share developing"></i>
+                    </div>
+                </div>
             </div>
 
             <div class="content">
@@ -54,8 +73,6 @@
 
         </aside>
 
-       
-
         <div class="post-adsense">
             <div>
                 <h3>publicidades</h3>
@@ -66,5 +83,57 @@
         </div>
 
     </div>
+
+
+<script>
+    function postLike(e){
+        const post_id = e.getAttribute("data-action");
+        const urlPostLike = "{% url 'api_post_like' %}";
+        const csrftoekn = "{{ csrf_token }}";
+        const data = {"post_id": post_id};
+        const headers = {
+            "X-CSRFToken": csrftoekn
+        }
+
+        if (e.classList.contains("liked")){
+            console.log("curtido")
+            data.action = "dislike";
+            
+        } else {
+            data.action = "liked";
+        }
+
+        console.log(`
+            post_id: ${post_id}
+            urlPostLike: ${urlPostLike}
+            csrftoekn: ${csrftoekn}
+        `)
+
+        fetch(urlPostLike, {
+            method: "post",
+            headers: headers,
+            body: JSON.stringify(data)
+        })
+        .then((data)=>{
+            return data.json();
+        })
+        .then((data)=>{
+            if(data.code == 200){
+                if(data.action == "liked"){
+                    e.classList.add("liked");
+                }
+                else {
+                    e.classList.remove("liked");
+                }
+            }
+            else if(data.code == 404){
+                popupShow();
+            }
+            else {
+                console.log(data)
+            }
+        });
+    }
+</script>
 
 {% endblock %}

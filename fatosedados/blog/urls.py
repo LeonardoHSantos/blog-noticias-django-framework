@@ -26,8 +26,10 @@ urlpatterns = [
     # ----------- PAINEL - POST METRICS -----------
     path('blog/post-mertics/', views.post_mertics, name='post_mertics'),
 
-    # ----------- API PAINEL - POST METRICS -----------
+    # -----------  APIs -----------
+    path('api/v1/login/', views.login_api_v1, name='login_api_v1'),
     path('api/post-mertics/', views.api_post_metrics, name='api_post_metrics'),
+    path('api/post-like/', views.api_post_like, name='api_post_like'),
 ]
 
 if not settings.DEBUG:

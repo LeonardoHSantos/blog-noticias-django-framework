@@ -511,15 +511,17 @@ li {
         width: 100% !important;
         align-items: center !important;
     }
-    .main-post .post-image {
+    .main-post .post-image  {
         width: 95vw !important;
-        height: 90vh !important;
+        min-height: 80vh !important;
+        max-height: 95vh;
     }
     .main-post .content {
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
+        /* margin-top: -20px !important; */
     }
     .main-post .content p,
     .main-post .info {

@@ -1,0 +1,33 @@
+.container-popup {
+    display: none;
+}
+.container-popup.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    background: #61615b8c;
+    width: 100%;
+    height: 100%;
+}
+.container-popup .block-user-account {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 18px;
+    padding: 20px 0;
+    width: 95vw;
+    max-width: 740px;
+    min-height: 55vh;
+    border-radius: 4px;
+    background: #ffffff;
+}
+
+.form-button-cancel {
+    background-color: black;
+}
