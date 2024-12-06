@@ -26,16 +26,19 @@
                 <div class="post-actions">
                     <div class="action">
                         {% if post.post_like %}
-                            <i class="fa-regular fa-heart like liked" data-action="{{ post.id }}" onclick="postLike(this);"></i>
+                            <i class="fa-regular fa-heart like liked" data-action="{{ post.id }}" onclick="postLike(this);" title="Curtir/Descurtir"></i>
                         {% else %}
-                            <i class="fa-regular fa-heart like" data-action="{{ post.id }}" onclick="postLike(this);"></i>
+                            <i class="fa-regular fa-heart like" data-action="{{ post.id }}" onclick="postLike(this);" title="Curtir/Descurtir"></i>
                         {% endif %}
                     </div>
                     <div class="action">
-                        <i class="fa-regular fa-comment comment developing"></i>
+                        <i class="fa-regular fa-comment comment developing" title="Comentar"></i>
                     </div>
                     <div class="action">
-                        <i class="fa-solid fa-share-nodes share" onclick="postShare(this);"></i>
+                        <i class="fa-solid fa-share-nodes share" onclick="postShare(this);" title="Copiar link"></i>
+                        <span class="message-action-icon share">
+                            <p>Link copiado</p>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -131,20 +134,27 @@
 
 <script>
 
-    function postShare(e){
-        if (navigator.share) {
-            navigator = navigator.share.bind(navigator);
-            navigator.share({
-            title: 'Compartilhe meu artigo',
-            text: 'Confira este artigo incrível!',
-            url: window.location.href
-            })
-            .then(() => console.log('Conteúdo compartilhado com sucesso'))
-            .catch((error) => console.error('Erro ao compartilhar:', error));
-        } else {
-            console.log('A API Navigator.share() não é suportada neste navegador.');
-        }
-    };
+    function postShare(e) {
+        // Obtém o URL da página atual
+        var url = window.location.href;
+        const info_action_share = document.querySelector(".message-action-icon.share");
+
+        // Copia o URL para a área de transferência
+        navigator.clipboard.writeText(url).then(function() {
+            info_action_share.classList.add("active");
+            e.classList.add("active");
+            setTimeout(()=>{
+                e.classList.remove("active");
+            }, 200);
+            setTimeout(()=>{
+                info_action_share.classList.remove("active");
+            }, 1800);
+            
+        }).catch(function(error) {
+            // Se houve algum erro, exibe uma mensagem de erro
+            console.error('Erro ao copiar o link: ', error);
+        });
+    }
 </script>
 
 

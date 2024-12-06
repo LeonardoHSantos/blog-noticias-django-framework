@@ -129,3 +129,25 @@
 .post-actions .action i.comment  {
     transform: rotateY(180deg);
 }
+
+.post-actions .action i.share.active {
+    color: #000000;
+}
+
+.post-actions .action .message-action-icon {
+    display: none;
+}
+.post-actions .action .message-action-icon.active {
+    display: flex;
+    position: absolute;
+    transform: translate(66px, -20px);
+    display: flex;
+    z-index: 9;
+}
+.message-action-icon p {
+    background-color: black;
+    color: white;
+    font-size: 0.9rem;
+    border-radius: 16px;
+    padding: 5px 10px;
+}
