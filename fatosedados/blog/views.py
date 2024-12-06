@@ -54,13 +54,11 @@ def login(request):
 
         # Usando authenticate para verificar as credenciais com o modelo customizado
         user = authenticate(request, username=email, password=password)
-        print("\n\n >>>>>>>>> user")
-        print(user)
+
         if user is not None:
             django_login(request, user)  # Realiza o login
             return redirect('home')
         else:
-            print("E-mail ou senha incorretos.")
             context = {
                 "email": email,
                 "password": password,
@@ -92,7 +90,6 @@ def register(request):
             "password": password,
             "confirm_password": confirm_password,
         }
-        print(context)
 
         if not re.match(EMAIL_REGEX, email):
             context["message_form"] = True
@@ -308,14 +305,12 @@ def post_mertics(request):
 def login_api_v1(request):
     if request.method == "POST":
         data = json.loads(request.body)
-        print(data)
         email = data["email"]
         password = data["password"]
         
         if email == "" or password == "":
             return JsonResponse({"code": 404, "message": "Preencha todos os campos."})
         
-
         user = authenticate(request, username=email, password=password)
         if user is not None:
             django_login(request, user)
