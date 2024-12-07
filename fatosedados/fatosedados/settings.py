@@ -49,7 +49,12 @@ CSP_SCRIPT_SRC = (
     "https://www.googletagmanager.com"
 )
 CSP_FRAME_SRC = ("'self'", "https://googleads.g.doubleclick.net", "https://ep2.adtrafficquality.google", "https://www.google.com")
-CSP_CONNECT_SRC = ("'self'", "https://ep1.adtrafficquality.google", "https://csi.gstatic.com")
+CSP_CONNECT_SRC = (
+    "'self'",
+    "https://ep1.adtrafficquality.google",
+    "https://csi.gstatic.com",
+    "https://www.google-analytics.com"
+)
 CSP_IMG_SRC = ("'self'", "data:", "https://ep1.adtrafficquality.google", "https://pagead2.googlesyndication.com")
 
 AUTH_USER_MODEL = 'blog.UserRegistration'
