@@ -46,7 +46,8 @@ CSP_SCRIPT_SRC = (
     "'unsafe-inline'",
     "https://pagead2.googlesyndication.com",
     "https://ep2.adtrafficquality.google",
-    "https://www.googletagmanager.com"
+    "https://www.googletagmanager.com",
+    "https://cdn.jsdelivr.net",
 )
 CSP_FRAME_SRC = ("'self'", "https://googleads.g.doubleclick.net", "https://ep2.adtrafficquality.google", "https://www.google.com")
 CSP_CONNECT_SRC = (
