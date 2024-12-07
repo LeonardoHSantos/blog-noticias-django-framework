@@ -37,9 +37,9 @@
 
     <!-- Banner de Cookies -->
     <div id="cookie-banner" style="text-align: center; display: none;">
-        <p>Este site usa cookies para melhorar a sua experiência. Ao continuar a navegar, você aceita nossa Política de Cookies.</p>
-        <button id="accept-cookies" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer;">Aceitar Cookies</button>
-        <button id="decline-cookies" style="background-color: #f44336; color: white; padding: 10px 20px; border: none; cursor: pointer;">Rejeitar Cookies</button>
+        <p>Este site usa cookies para melhorar a sua experiência. Ao continuar a navegar, você aceita nossa <a href="{% url 'privacidade' %}" style="color: #d6ff00;">Política de Cookies</a>.</p>
+        <button id="accept-cookies" style="background-color: #ffffff; color: #333; padding: 10px 20px; border: none; cursor: pointer;">continuar e fechar</button>
+        <!-- <button id="decline-cookies" style="background-color: #f44336; color: white; padding: 10px 20px; border: none; cursor: pointer;">Rejeitar Cookies</button> -->
     </div>
 </body>
 </html>
@@ -84,17 +84,17 @@
       enableCookies();
     };
   
-    // Função para rejeitar os cookies
-    document.getElementById('decline-cookies').onclick = function() {
-      // Ocultar o banner de cookies
-      document.getElementById('cookie-banner').style.display = 'none';
+    // // Função para rejeitar os cookies
+    // document.getElementById('decline-cookies').onclick = function() {
+    //   // Ocultar o banner de cookies
+    //   document.getElementById('cookie-banner').style.display = 'none';
   
-      // Armazenar no localStorage que o usuário rejeitou os cookies
-      localStorage.setItem('cookiesAccepted', 'false');
+    //   // Armazenar no localStorage que o usuário rejeitou os cookies
+    //   localStorage.setItem('cookiesAccepted', 'false');
   
-      // Aqui você pode desativar ou não carregar scripts de terceiros (como AdSense, Analytics, etc.)
-      disableCookies();
-    };
+    //   // Aqui você pode desativar ou não carregar scripts de terceiros (como AdSense, Analytics, etc.)
+    //   disableCookies();
+    // };
   
     // Função para ativar cookies (exemplo: Google Analytics ou AdSense)
     function enableCookies() {
