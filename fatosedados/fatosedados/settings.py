@@ -69,6 +69,7 @@ CSP_CONNECT_SRC = (
     "https://csi.gstatic.com",
     "https://www.google-analytics.com",
     "https://analytics.google.com",
+    "https://stats.g.doubleclick.net",
 )
 CSP_IMG_SRC = (
     "'self'",
