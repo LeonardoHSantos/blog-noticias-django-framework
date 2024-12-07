@@ -268,7 +268,7 @@ def post(request, post_id, title_post):
 
         post_like = False
         try:
-            if not request.user.id:
+            if request.user.id:
                 check_like = Like.objects.filter(user=request.user, post=postFilter)
                 if len(check_like) >= 1:
                     if check_like.last().action == "liked":

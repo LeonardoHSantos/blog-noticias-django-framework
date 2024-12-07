@@ -52,8 +52,30 @@
     {% if user.is_authenticated %}
         <div class="tools">
             <ul>
-                <li><a href="{% url 'post_mertics' %}">Painel</a></li>
-                <li><a href="{% url 'create_post' %}">Novo Post</a></li>
+                <li class="display-mobile">
+                    <a href="{% url 'home' %}">
+                        <i class="fa-solid fa-house"></i>
+                        <span>
+                            Início
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'post_mertics' %}">
+                        <i class="fa-solid fa-chart-simple"></i>
+                        <span>
+                            Painel
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'create_post' %}">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>
+                            Novo Post
+                        </span>
+                    </a>
+                </li>
             </ul>
         </div>
     {% endif %}
