@@ -55,7 +55,16 @@ CSP_CONNECT_SRC = (
     "https://csi.gstatic.com",
     "https://www.google-analytics.com"
 )
+CSP_CONNECT_SRC = (
+    "'self'",
+    "https://ep1.adtrafficquality.google",
+    "https://csi.gstatic.com",
+    "https://www.google-analytics.com",
+    "https://analytics.google.com",
+)
 CSP_IMG_SRC = ("'self'", "data:", "https://ep1.adtrafficquality.google", "https://pagead2.googlesyndication.com")
+
+
 
 AUTH_USER_MODEL = 'blog.UserRegistration'
 
