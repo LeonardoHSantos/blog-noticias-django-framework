@@ -103,6 +103,7 @@
       script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
       script.async = true;
       document.head.appendChild(script);
+      document.cookie = "cookie_consent=true; path=/; max-age=" + 60 * 60 * 24 * 365; // 1 ano
     }
   
     // Função para desativar cookies (não carregar scripts de terceiros)
