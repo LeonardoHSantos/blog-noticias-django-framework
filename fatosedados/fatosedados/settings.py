@@ -20,6 +20,7 @@ CSRF_TRUSTED_ORIGINS = [
     "http://estampaverso.shop", 
     "https://estampaverso.shop"
 ]
+CORS_ORIGIN_ALLOW_ALL = True
 
 
 
