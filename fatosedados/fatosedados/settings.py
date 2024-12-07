@@ -49,12 +49,19 @@ CSP_SCRIPT_SRC = (
     "https://www.googletagmanager.com",
     "https://cdn.jsdelivr.net",
 )
-CSP_FRAME_SRC = ("'self'", "https://googleads.g.doubleclick.net", "https://ep2.adtrafficquality.google", "https://www.google.com")
+CSP_FRAME_SRC = (
+    "'self'",
+    "https://googleads.g.doubleclick.net",
+    "https://ep2.adtrafficquality.google",
+    "https://www.google.com",
+    "https://td.doubleclick.net"
+)
 CSP_CONNECT_SRC = (
     "'self'",
     "https://ep1.adtrafficquality.google",
     "https://csi.gstatic.com",
-    "https://www.google-analytics.com"
+    "https://www.google-analytics.com",
+    "https://stats.g.doubleclick.net",
 )
 CSP_CONNECT_SRC = (
     "'self'",
@@ -63,7 +70,13 @@ CSP_CONNECT_SRC = (
     "https://www.google-analytics.com",
     "https://analytics.google.com",
 )
-CSP_IMG_SRC = ("'self'", "data:", "https://ep1.adtrafficquality.google", "https://pagead2.googlesyndication.com")
+CSP_IMG_SRC = (
+    "'self'",
+    "data:",
+    "https://ep1.adtrafficquality.google",
+    "https://pagead2.googlesyndication.com",
+    "https://www.google.com.br",
+)
 
 
 
