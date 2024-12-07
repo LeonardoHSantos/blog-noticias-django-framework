@@ -37,9 +37,10 @@ INSTALLED_APPS = [
     'csp',
 ]
 
-CSP_FRAME_ANCESTORS = ("'self'", "https://www.google.com")
-CSP_STYLE_SRC = ("'self'", "https://fonts.googleapis.com")
+CSP_DEFAULT_SRC = ("'self'",)
+CSP_STYLE_SRC = ("'self'", "'unsafe-inline'", "https://fonts.googleapis.com")
 CSP_FONT_SRC = ("'self'", "https://fonts.gstatic.com")
+CSP_SCRIPT_SRC = ("'self'", "'unsafe-inline'", "https://pagead2.googlesyndication.com")
 
 AUTH_USER_MODEL = 'blog.UserRegistration'
 
