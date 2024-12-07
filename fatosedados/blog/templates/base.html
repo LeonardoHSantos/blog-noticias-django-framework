@@ -34,6 +34,13 @@
     {% endblock %}
 
     {% include 'snippets/footer/footer.html' %}
+
+    <!-- Banner de Cookies -->
+    <div id="cookie-banner" style="text-align: center; display: none;">
+        <p>Este site usa cookies para melhorar a sua experiência. Ao continuar a navegar, você aceita nossa Política de Cookies.</p>
+        <button id="accept-cookies" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer;">Aceitar Cookies</button>
+        <button id="decline-cookies" style="background-color: #f44336; color: white; padding: 10px 20px; border: none; cursor: pointer;">Rejeitar Cookies</button>
+    </div>
 </body>
 </html>
 
@@ -50,4 +57,58 @@
         document.body.style.overflow = "scroll";
         container_popup.classList.remove("active");
     }
+
 </script>
+
+<script>
+    // Função para verificar se o usuário já aceitou os cookies
+    function checkCookieConsent() {
+      // Verificar se o consentimento de cookies foi armazenado no localStorage
+      const cookiesAccepted = localStorage.getItem('cookiesAccepted');
+      if (!cookiesAccepted) {
+        // Se não foi aceito ainda, mostrar o banner de cookies
+        document.getElementById('cookie-banner').style.display = 'block';
+      }
+    }
+  
+    // Função para aceitar os cookies
+    document.getElementById('accept-cookies').onclick = function() {
+      // Ocultar o banner de cookies
+      document.getElementById('cookie-banner').style.display = 'none';
+  
+      // Armazenar no localStorage que o usuário aceitou os cookies
+      localStorage.setItem('cookiesAccepted', 'true');
+  
+      // Aqui você pode permitir os cookies de terceiros (por exemplo, configurar o AdSense)
+      // Exemplo: ativar scripts relacionados ao Google Analytics ou AdSense
+      enableCookies();
+    };
+  
+    // Função para rejeitar os cookies
+    document.getElementById('decline-cookies').onclick = function() {
+      // Ocultar o banner de cookies
+      document.getElementById('cookie-banner').style.display = 'none';
+  
+      // Armazenar no localStorage que o usuário rejeitou os cookies
+      localStorage.setItem('cookiesAccepted', 'false');
+  
+      // Aqui você pode desativar ou não carregar scripts de terceiros (como AdSense, Analytics, etc.)
+      disableCookies();
+    };
+  
+    // Função para ativar cookies (exemplo: Google Analytics ou AdSense)
+    function enableCookies() {
+      // Exemplo de inclusão do script do Google Analytics ou AdSense, ou ativação de cookies necessários.
+      const script = document.createElement('script');
+      script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
+      script.async = true;
+      document.head.appendChild(script);
+    }
+  
+    // Função para desativar cookies (não carregar scripts de terceiros)
+    function disableCookies() {
+    }
+  
+    // Verificar se o usuário já fez a escolha e exibir o banner se necessário
+    checkCookieConsent();
+  </script>

@@ -375,6 +375,38 @@ li {
 }
 
 
+/* ---------------------- COOKIES ----------------------  */
+#cookie-banner {
+    width: 100%;
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 8px auto;
+    border-top: 1px solid #333;
+    background: #333;
+}
+#cookie-banner p {
+    padding: 11px;
+    text-align: center;
+    color: white;
+}
+#cookie-banner button {
+    cursor: pointer;
+    width: 150px;
+    padding: 10px;
+    margin: 10px;
+    color: #1c1b1b;
+    background: #f9ff00;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
 .menu-icon-mobile {
     display: none;
     flex-direction: row;
