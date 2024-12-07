@@ -17,8 +17,8 @@ ALLOWED_HOSTS = ["*", "http://129.148.59.220",]
 CSRF_TRUSTED_ORIGINS = [
     "http://129.148.59.220",
     "https://129.148.59.220",
-    "http://estampaverso.shop", # teste 
-    "https://estampaverso.shop" # teste
+    "http://estampaverso.shop", 
+    "https://estampaverso.shop"
 ]
 
 
@@ -34,7 +34,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'fontawesomefree',
+    'csp',
 ]
+
+CSP_FRAME_ANCESTORS = ("'self'", "https://www.google.com")
+CSP_STYLE_SRC = ("'self'", "https://fonts.googleapis.com")
+CSP_FONT_SRC = ("'self'", "https://fonts.gstatic.com")
 
 AUTH_USER_MODEL = 'blog.UserRegistration'
 
@@ -47,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'blog.middleware.VerificarURLMiddleware',
+    'csp.middleware.CSPMiddleware',
 ]
 
 ROOT_URLCONF = 'fatosedados.urls'
