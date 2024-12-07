@@ -5,6 +5,7 @@ from datetime import datetime
 
 from django.shortcuts import render, redirect
 from django.http.response import JsonResponse
+from django.http import HttpResponse
 
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from django.contrib.auth.decorators import login_required
@@ -299,6 +300,12 @@ def post(request, post_id, title_post):
 def post_mertics(request):
     if request.method == "GET":
         return render(request, "metrics/post_metrics.html")
+
+# ------------------------------------------- GOOGLE ADS -------------------------------------------
+def ads_txt_view(request):
+    with open('ads.txt') as file:
+        file_content = file.readlines()
+    return HttpResponse(file_content, content_type="text/plain")
 
 # ------------------------------------------- APIs -------------------------------------------
 

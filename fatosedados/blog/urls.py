@@ -23,6 +23,10 @@ urlpatterns = [
     path('blog/post/edit/<int:post_id>', views.post_edit, name='post_edit'),
     path('blog/post/delete/<int:post_id>', views.post_delete, name='post_delete'),
 
+    # ---- GOOGLE ADS
+    path('ads.txt', views.ads_txt_view, name='ads_txt'),
+
+
     # ----------- PAINEL - POST METRICS -----------
     path('blog/post-mertics/', views.post_mertics, name='post_mertics'),
 
