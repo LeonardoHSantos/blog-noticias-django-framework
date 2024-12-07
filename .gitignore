@@ -3,6 +3,7 @@ __pycache__
 *.csv
 *.json
 *.pem
+*.txt
 .env
 *.sqlite3
 db.sqlite3
