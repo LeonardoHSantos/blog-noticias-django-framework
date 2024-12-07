@@ -43,7 +43,7 @@ CSP_FONT_SRC = ("'self'", "https://fonts.gstatic.com")
 CSP_SCRIPT_SRC = ("'self'", "'unsafe-inline'", "https://pagead2.googlesyndication.com", "https://ep2.adtrafficquality.google")
 CSP_FRAME_SRC = ("'self'", "https://googleads.g.doubleclick.net", "https://ep2.adtrafficquality.google", "https://www.google.com")
 CSP_CONNECT_SRC = ("'self'", "https://ep1.adtrafficquality.google", "https://csi.gstatic.com")
-CSP_IMG_SRC = ("'self'", "data:", "https://ep1.adtrafficquality.google")
+CSP_IMG_SRC = ("'self'", "data:", "https://ep1.adtrafficquality.google", "https://pagead2.googlesyndication.com")
 
 AUTH_USER_MODEL = 'blog.UserRegistration'
 
