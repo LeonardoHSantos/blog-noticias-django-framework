@@ -15,7 +15,7 @@
             <ul class="container-posts">
                 {% for post in latest_posts %}
                     <li class="post">
-                        <a href="{% url 'post' post_id=post.id title_post=post.title %}">
+                        <a href="{% url 'post' post_id=post.id title_post=post.alternative_title %}">
                             <div class="content-post">
                                                        
                                 <div class="post-datails">
@@ -57,7 +57,7 @@
             <ul class="container-posts">
                 {% for post in posts %}
                     <li class="post">
-                        <a  href="{% url 'post' post_id=post.id title_post=post.title %}">
+                        <a  href="{% url 'post' post_id=post.id title_post=post.alternative_title %}">
                             <div class="content-post">
                                                        
                                 <div class="post-datails">

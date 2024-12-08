@@ -6,6 +6,7 @@ from datetime import datetime
 from django.shortcuts import render, redirect
 from django.http.response import JsonResponse
 from django.http import HttpResponse
+from django.utils.text import slugify
 
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from django.contrib.auth.decorators import login_required
@@ -147,10 +148,11 @@ def privacidade(request):
 def post_list(request):
     
     posts = Post.objects.all().order_by("-number_of_visitors")
-    
+    latest_posts = Post.objects.all().order_by("-created_at")[:3]
     addtional_images = PostImage.objects.all()
 
-    latest_posts = Post.objects.all().order_by("-created_at")[:3]
+    for post in posts: post.alternative_title =  slugify(post.title)
+    for post in latest_posts: post.alternative_title =  slugify(post.title)
     
     return render(request, 'blog/post_list.html', {'posts': posts, 'addtional_images': addtional_images, 'latest_posts': latest_posts})
 
