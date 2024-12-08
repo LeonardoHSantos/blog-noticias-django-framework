@@ -38,16 +38,18 @@ INSTALLED_APPS = [
     'csp',
 ]
 
+# Content Security Policy no settings.py
+
 CSP_DEFAULT_SRC = ("'self'",)
 CSP_STYLE_SRC = ("'self'", "'unsafe-inline'", "https://fonts.googleapis.com")
 CSP_FONT_SRC = ("'self'", "https://fonts.gstatic.com")
 CSP_SCRIPT_SRC = (
     "'self'",
     "'unsafe-inline'",
-    "https://pagead2.googlesyndication.com",  # Adicionar o domínio correto
-    "https://ep2.adtrafficquality.google",
-    "https://www.googletagmanager.com",
-    "https://cdn.jsdelivr.net",
+    "https://pagead2.googlesyndication.com",  # Scripts de anúncios do Google
+    "https://ep2.adtrafficquality.google",    # Scripts de anúncios do Google
+    "https://www.googletagmanager.com",       # Tag manager
+    "https://cdn.jsdelivr.net",               # CDN para JS (se estiver usando)
 )
 CSP_FRAME_SRC = (
     "'self'",
@@ -58,19 +60,19 @@ CSP_FRAME_SRC = (
 )
 CSP_CONNECT_SRC = (
     "'self'",
-    "https://ep1.adtrafficquality.google",
-    "https://csi.gstatic.com",
-    "https://www.google-analytics.com",
-    "https://analytics.google.com",  # Certifique-se de que analytics.google.com esteja aqui
-    "https://stats.g.doubleclick.net",
-    "https://pagead2.googlesyndication.com",  # Certifique-se de que este domínio também esteja aqui
+    "https://ep1.adtrafficquality.google",      # Adicionando para conectar com o Google Ads
+    "https://csi.gstatic.com",                   # Conexões de script de anúncios
+    "https://www.google-analytics.com",          # Google Analytics
+    "https://analytics.google.com",              # Analytics
+    "https://stats.g.doubleclick.net",           # DoubleClick
+    "https://pagead2.googlesyndication.com",     # Google Ads
 )
 CSP_IMG_SRC = (
     "'self'",
     "data:",
     "https://ep1.adtrafficquality.google",
     "https://pagead2.googlesyndication.com",
-    "https://www.google.com.br",
+    "https://www.google.com.br",  # Google Images
 )
 
 
