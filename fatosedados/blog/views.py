@@ -262,6 +262,9 @@ def post(request, post_id, title_post):
         postFilter = Post.objects.all().filter(id=post_id).first()
         postFilter.number_of_visitors += 1
         postFilter.save()
+        
+        latest_posts = Post.objects.all().order_by("-created_at")[:3]
+        for post in latest_posts: post.alternative_title =  slugify(post.title)
 
         metric = PostMetrics.objects.create(post=postFilter)
         metric.save()
@@ -291,7 +294,8 @@ def post(request, post_id, title_post):
                 "number_of_visitors": postFilter.number_of_visitors,
                 "created_at": postFilter.created_at,
                 "post_like": post_like,
-            }
+            },
+            "latest_posts": latest_posts,
         }
 
         return render(request, 'blog/post.html', context=context)
