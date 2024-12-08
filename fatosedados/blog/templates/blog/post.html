@@ -8,8 +8,9 @@
 
         </div>
     </div> -->
-
-    <h1 class="principal-title" style="padding: 25px 0;">{{ post.title }}</h1>
+    <div class="title-page">
+        <h1 class="principal-title" style="padding: 25px 0;">{{ post.title }}</h1>
+    </div>
 
     <div class="container-popup">
         {% include 'snippets/popups/login.html' %}
@@ -21,41 +22,36 @@
 
             <div class="post-image">
                 <img src="{{ post.cover_image.url }}" alt="{{ post.cover_image.url }}">
+            </div>
+            <div class="info-post">
                 <p class="font-image">Fonte: imagem criada com auxílio de IA, por Leonardo H Santos</p>
-                <div class="post-actions">
-                    <div class="action">
-                        {% if post.post_like %}
-                            <i class="fa-regular fa-heart like liked" data-action="{{ post.id }}" onclick="postLike(this);" title="Curtir/Descurtir"></i>
-                        {% else %}
-                            <i class="fa-regular fa-heart like" data-action="{{ post.id }}" onclick="postLike(this);" title="Curtir/Descurtir"></i>
-                        {% endif %}
-                    </div>
-                    <div class="action">
-                        <i class="fa-regular fa-comment comment developing" title="Comentar"></i>
-                    </div>
-                    <div class="action">
-                        <i class="fa-solid fa-share-nodes share" onclick="postShare(this);" title="Copiar link"></i>
-                        <span class="message-action-icon share">
-                            <p>Link copiado</p>
-                        </span>
-                    </div>
+            </div>
+            
+            <div class="post-actions">
+                <div class="action">
+                    {% if post.post_like %}
+                        <i class="fa-regular fa-heart like liked" data-action="{{ post.id }}" onclick="postLike(this);" title="Curtir/Descurtir"></i>
+                    {% else %}
+                        <i class="fa-regular fa-heart like" data-action="{{ post.id }}" onclick="postLike(this);" title="Curtir/Descurtir"></i>
+                    {% endif %}
                 </div>
+                <div class="action">
+                    <i class="fa-regular fa-comment comment developing" title="Comentar"></i>
+                </div>
+                <div class="action">
+                    <i class="fa-solid fa-share-nodes share" onclick="postShare(this);" title="Copiar link"></i>
+                    <span class="message-action-icon share">
+                        <p>Link copiado</p>
+                    </span>
+                </div>
+            </div>
+            <div class="info-post">
+                <p>{{ post.created_at }}</p>
+                <p>Autor: {{ post.author }}</p>
             </div>
 
             <div class="content">
                 <p>{{ post.content|linebreaksbr }}</p>
-            </div>
-            <div class="info">
-                <p>Visualizações:</p>
-                <p>{{ post.number_of_visitors }}</p>
-            </div>
-            <div class="info">
-                <p>Publicado em:</p>
-                <p>{{ post.created_at }}</p>
-            </div>
-            <div class="info">
-                <p>Autor:</p>
-                <p>{{ post.author }}</p>
             </div>
             
             <div class="info">

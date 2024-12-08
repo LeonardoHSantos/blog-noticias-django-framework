@@ -24,7 +24,7 @@
     align-items: flex-start;
     justify-content: flex-start;
     padding: 10px 0;
-    gap: 10px;
+    /* gap: 10px; */
 }
 
 .main-post .post-image {
@@ -46,6 +46,19 @@
 .main-post .post-image .font-image {
     color: #63635b;
     font-size: 12px;
+}
+
+.info-post {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 95vw;
+    max-width: 100%;
+}
+.info-post p {
+    font-size: 0.755rem;
+    color: #313127;
 }
 
 .main-post .content {

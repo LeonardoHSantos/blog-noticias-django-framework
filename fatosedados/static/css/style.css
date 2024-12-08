@@ -157,6 +157,24 @@ li {
     font-size: 1rem;
 }
 
+
+
+/* --------------------------------------------------- TÍTULOS DAS PÁGINAS ---------------------------------------------------  */
+.title-page {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+}
+.title-page h1 {
+    width: 90vw;
+    max-width: 100%;
+    padding: 25px 0;
+    margin: 10px 0;
+    border-bottom: 1px solid black;
+}
 /* --------------------------------------------------- SOBRE ---------------------------------------------------  */
 .about-container {
     max-width: 100%;
@@ -531,9 +549,9 @@ li {
     .main-posts {
         align-items: center !important;
     }
-    .container-posts .post {
+    /* .container-posts .post {
         padding: 0 !important;
-    }
+    } */
 }
 
 

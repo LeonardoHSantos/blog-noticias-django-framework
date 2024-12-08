@@ -262,8 +262,8 @@ def post(request, post_id, title_post):
         postFilter = Post.objects.all().filter(id=post_id).first()
         postFilter.number_of_visitors += 1
         postFilter.save()
-        
-        latest_posts = Post.objects.all().order_by("-created_at")[:3]
+
+        latest_posts = Post.objects.all().exclude(id=post_id).order_by("-created_at")[:3]
         for post in latest_posts: post.alternative_title =  slugify(post.title)
 
         metric = PostMetrics.objects.create(post=postFilter)

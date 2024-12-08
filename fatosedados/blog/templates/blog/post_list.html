@@ -3,7 +3,10 @@
 {% block title %}Posts{% endblock %}
 {% block content %}
 
-    <h1 class="principal-title" style="margin: 14px 0;">Fique por dentro das notícias</h1>
+    
+    <div class="title-page">
+        <h1>Fique por dentro das notícias</h1>
+    </div>
 
     <div class="container-principal">
         
@@ -63,9 +66,7 @@
                                 <div class="post-datails">
             
                                     <p class="post-create-at">
-                                        <!-- <span>Publicado:</span> -->
                                         <span>{{ post.created_at }}</span>
-                                        <span>Visualizações: {{post.number_of_visitors}}</span>
                                     </p>
     
                                     <h2>
