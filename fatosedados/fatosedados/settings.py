@@ -53,20 +53,29 @@ CSP_SCRIPT_SRC = (
 )
 CSP_FRAME_SRC = (
     "'self'",
-    "https://googleads.g.doubleclick.net",
-    "https://ep2.adtrafficquality.google",
-    "https://www.google.com",
-    "https://td.doubleclick.net"
+    "https://googleads.g.doubleclick.net",  # Google Ads
+    "https://ep2.adtrafficquality.google",  # Google Ads
+    "https://www.google.com",               # Google
+    "https://td.doubleclick.net",           # DoubleClick
 )
+
+# **Adicione a diretiva frame-ancestors**
+CSP_FRAME_ANCESTORS = (
+    "'self'",  # Permitir embutir apenas em seu próprio domínio
+    "https://www.google.com",  # Permitir embutir em iframes do Google
+    "https://googleads.g.doubleclick.net",  # Permitir iframes do Google Ads
+)
+
 CSP_CONNECT_SRC = (
     "'self'",
-    "https://ep1.adtrafficquality.google",      # Adicionando para conectar com o Google Ads
+    "https://ep1.adtrafficquality.google",      # Google Ads
     "https://csi.gstatic.com",                   # Conexões de script de anúncios
     "https://www.google-analytics.com",          # Google Analytics
     "https://analytics.google.com",              # Analytics
     "https://stats.g.doubleclick.net",           # DoubleClick
     "https://pagead2.googlesyndication.com",     # Google Ads
 )
+
 CSP_IMG_SRC = (
     "'self'",
     "data:",
