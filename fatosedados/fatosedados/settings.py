@@ -48,6 +48,7 @@ CSP_SCRIPT_SRC = (
     "https://ep2.adtrafficquality.google",
     "https://www.googletagmanager.com",
     "https://cdn.jsdelivr.net",
+    "https://adsbygoogle.js",
 )
 CSP_FRAME_SRC = (
     "'self'",
@@ -62,6 +63,7 @@ CSP_CONNECT_SRC = (
     "https://csi.gstatic.com",
     "https://www.google-analytics.com",
     "https://stats.g.doubleclick.net",
+    "https://pagead2.googlesyndication.com"
 )
 CSP_CONNECT_SRC = (
     "'self'",
