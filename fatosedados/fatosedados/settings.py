@@ -44,11 +44,10 @@ CSP_FONT_SRC = ("'self'", "https://fonts.gstatic.com")
 CSP_SCRIPT_SRC = (
     "'self'",
     "'unsafe-inline'",
-    "https://pagead2.googlesyndication.com",
+    "https://pagead2.googlesyndication.com",  # Adicionar o domínio correto
     "https://ep2.adtrafficquality.google",
     "https://www.googletagmanager.com",
     "https://cdn.jsdelivr.net",
-    "https://adsbygoogle.js",
 )
 CSP_FRAME_SRC = (
     "'self'",
@@ -62,16 +61,9 @@ CSP_CONNECT_SRC = (
     "https://ep1.adtrafficquality.google",
     "https://csi.gstatic.com",
     "https://www.google-analytics.com",
+    "https://analytics.google.com",  # Certifique-se de que analytics.google.com esteja aqui
     "https://stats.g.doubleclick.net",
-    "https://pagead2.googlesyndication.com"
-)
-CSP_CONNECT_SRC = (
-    "'self'",
-    "https://ep1.adtrafficquality.google",
-    "https://csi.gstatic.com",
-    "https://www.google-analytics.com",
-    "https://analytics.google.com",
-    "https://stats.g.doubleclick.net",
+    "https://pagead2.googlesyndication.com",  # Certifique-se de que este domínio também esteja aqui
 )
 CSP_IMG_SRC = (
     "'self'",
