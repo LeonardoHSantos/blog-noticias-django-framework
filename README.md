@@ -1,7 +1,7 @@
 # Projeto pessoal: desenvolvimento de um Blog de notícias com Django Framework, HTML, CSS, JavaScript, AWS (MySQL/RDS).
 
 ## Projeto: EstampaVersoShop
-* **`Acesse o site aqui`:** <a href="https://estampaverso.shop/">https://estampaverso.shop/</a>
+* **`Acesse o site aqui`:** <a href="https://estampaverso.shop/" target="_blank">https://estampaverso.shop/</a>
 
 ## Funcionalidades do Blog:
 O blog possui as seguintes funcionalidades principais:
