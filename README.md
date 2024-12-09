@@ -9,7 +9,6 @@
 ## Funcionalidades do Blog:
 O blog possui as seguintes funcionalidades principais:
 
-
 **Páginas:**
 
 * **`home`:** Exibe a página inicial do blog, com os posts mais visitados e os posts mais recentes.

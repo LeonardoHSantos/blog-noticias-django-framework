@@ -33,19 +33,14 @@
 
             {% if post.cover_image %}
                 <div class="input-image">
-                    <img src="{{ post.cover_image.url }}" alt="Imagem de Capa Atual" style="max-width: 200px; height: auto;">
+                    <img src="{{ post.cover_image.url }}" id="preview_image" alt="Imagem de Capa Atual" style="max-width: 200px; height: auto;">
                 </div>
             {% endif %}
-
+            
             <div class="input">
                 <label for="content">Imagem de Capa</label>
                 <input type="file" id="cover_image" name="cover_image" accept="image/*">
             </div>
-
-            <!-- <div class="input">
-                <label for="content">Imagem de Capa</label>
-                <input type="file" id="cover_image" name="cover_image" accept="image/*">
-            </div> -->
 
             <button type="submit">Salvar Post</button>
             
@@ -70,4 +65,22 @@
         </form>
     {% endif %}
 </div>
+
+
+<script>
+    document.getElementById('cover_image').addEventListener('change', function (event) {
+        const input = event.target;
+        const previewImage = document.getElementById('preview_image');
+        
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                previewImage.src = e.target.result; // Define o novo src da imagem
+            };
+
+            reader.readAsDataURL(input.files[0]); // Lê o arquivo como DataURL
+        }
+    });
+</script>
 {% endblock %}
