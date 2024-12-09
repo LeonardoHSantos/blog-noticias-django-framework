@@ -4,7 +4,7 @@
 * **`Acesse o site aqui`:** <a href="https://estampaverso.shop/" target="_blank">https://estampaverso.shop/</a>
 - Versão: 1.0
 
-![Demonstração do site](fatosedados\media\images\demonstracao-site.gif)
+![Demonstração do site](fatosedados/media/images/demonstracao-site.gif)
 
 ## Funcionalidades do Blog:
 O blog possui as seguintes funcionalidades principais:
