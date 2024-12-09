@@ -8,7 +8,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #ffffff;
 
         font-family: "Parkinsans", sans-serif;
         font-optical-sizing: auto;
@@ -175,6 +175,25 @@ li {
     margin: 10px 0;
     border-bottom: 1px solid black;
 }
+
+/* --------------------------------------------------- CATEGORIAS ---------------------------------------------------  */
+.container-categories {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+.container-categories ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    width: 95vw;
+    flex-wrap: wrap;
+}
+
+
 /* --------------------------------------------------- SOBRE ---------------------------------------------------  */
 .about-container {
     max-width: 100%;

@@ -149,12 +149,13 @@ def post_list(request):
     
     posts = Post.objects.all().order_by("-number_of_visitors")
     latest_posts = Post.objects.all().order_by("-created_at")[:3]
-    addtional_images = PostImage.objects.all()
+    recommendations_posts = Post.objects.all().order_by("title", "-number_of_visitors")[:3] # Filtro temporário até que seja desenvolvida área admin dos Posts.
 
     for post in posts: post.alternative_title =  slugify(post.title)
     for post in latest_posts: post.alternative_title =  slugify(post.title)
+    for post in recommendations_posts: post.alternative_title =  slugify(post.title)
     
-    return render(request, 'blog/post_list.html', {'posts': posts, 'addtional_images': addtional_images, 'latest_posts': latest_posts})
+    return render(request, 'blog/post_list.html', {'posts': posts, 'latest_posts': latest_posts, 'recommendations_posts': recommendations_posts})
 
 def create_post(request):
     if request.method == 'POST':
@@ -264,7 +265,7 @@ def post(request, post_id, title_post):
         postFilter.save()
 
         latest_posts = Post.objects.all().exclude(id=post_id).order_by("-created_at")[:3]
-        for post in latest_posts: post.alternative_title =  slugify(post.title)
+        for post in latest_posts: post.alternative_title = slugify(post.title)
 
         metric = PostMetrics.objects.create(post=postFilter)
         metric.save()

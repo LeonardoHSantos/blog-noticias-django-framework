@@ -7,55 +7,19 @@
         <h1>Bem vindo(a), confira os destaques</h1>
     </div>
 
+    <!-- <div class="container-categories">
+        <h2>Categorias</h2>
+        <ul>
+            <li><a href="">Economia</a></li>
+            <li><a href="">Política</a></li>
+            <li><a href="">Mundo</a></li>
+        </ul>
+    </div> -->
+
     <div class="container-principal">
         
-        <aside class="post-latest-news" style="width: 30vw;">
-            <div class="block-title">
-                <h3>últimas publicações</h3>
-            </div>
-            
-            <ul class="container-posts">
-                {% for post in latest_posts %}
-                    <li class="post">
-                        <a href="{% url 'post' post_id=post.id title_post=post.title %}">
-                            <div class="content-post">
-                                                       
-                                <div class="post-datails">
-            
-                                    <p class="post-create-at">
-                                        <!-- <span>Publicado:</span> -->
-                                        <span>{{ post.created_at }}</span>
-                                    </p>
-    
-                                    <h2 class="title-mini-post">
-                                        {{ post.title|truncatechars:40 }}
-                                    </h2>
-            
-                                    <p class="post-content mini-post">
-                                        {{ post.content|truncatechars:43 }}
-                                    </p>
-                                    <!-- <p class="post-author">
-                                        <small>Publicado por: {{ post.author }}</small>
-                                    </p> -->
-                                </div>
-    
-                                <div class="post-image">
-                                    {% if post.cover_image %}
-                                        <img src="{{ post.cover_image.url }}" alt="Imagem de Capa">
-                                    {% endif %}
-                                </div>
-    
-                            </div>
-                        </a>
-                    </li>
-                    
-                    
-                {% endfor %}
-            </ul>
-            
-        </aside>
-
         <main class="main-posts" style="width: 60vw;">
+
             <ul class="container-posts">
                 {% for post in posts %}
                     <li class="post">
@@ -65,9 +29,7 @@
                                 <div class="post-datails">
             
                                     <p class="post-create-at">
-                                        <!-- <span>Publicado:</span> -->
                                         <span>{{ post.created_at }}</span>
-                                        <span>Visualizações: {{post.number_of_visitors}}</span>
                                     </p>
     
                                     <h2>
@@ -107,7 +69,52 @@
                     
                 {% endfor %}
             </ul>
+            
         </main>
+
+        <aside class="post-latest-news" style="width: 30vw;">
+            <div class="block-title">
+                <h3>últimas publicações</h3>
+            </div>
+            
+            <ul class="container-posts">
+                {% for post in latest_posts %}
+                    <li class="post">
+                        <a href="{% url 'post' post_id=post.id title_post=post.title %}">
+                            <div class="content-post">
+                                                       
+                                <div class="post-datails">
+            
+                                    <p class="post-create-at">
+                                        <!-- <span>Publicado:</span> -->
+                                        <span>{{ post.created_at }}</span>
+                                    </p>
+    
+                                    <h2 class="title-mini-post">
+                                        {{ post.title|truncatechars:40 }}
+                                    </h2>
+            
+                                    <p class="post-content mini-post">
+                                        {{ post.content|truncatechars:43 }}
+                                    </p>
+                                    <!-- <p class="post-author">
+                                        <small>Publicado por: {{ post.author }}</small>
+                                    </p> -->
+                                </div>
+    
+                                <div class="post-image">
+                                    {% if post.cover_image %}
+                                        <img src="{{ post.cover_image.url }}" alt="Imagem de Capa">
+                                    {% endif %}
+                                </div>
+    
+                            </div>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+            
+        </aside>
 
     </div>
 
