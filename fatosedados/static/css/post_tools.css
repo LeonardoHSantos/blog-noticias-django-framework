@@ -78,6 +78,19 @@
     border: 1px solid #494c532d;
 }
 
+.main-content form .post-image,
+.main-content form .post-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+#preview_image {
+    display: none;
+}
+#preview_image.active {
+    display: flex;
+}
+
 .form-group {
     width: 100%;
     display: flex;
