@@ -81,9 +81,10 @@ CSP_IMG_SRC = (
     "data:",
     "https://ep1.adtrafficquality.google",
     "https://pagead2.googlesyndication.com",
-    "https://www.google.com.br",  # Google Images
+    "https://www.google.com.br",
+    "https://www.google.com",  # Google Images
+    "https://www.googletagmanager.com",  # Permitir imagens do Google Tag Manager
 )
-
 
 
 AUTH_USER_MODEL = 'blog.UserRegistration'

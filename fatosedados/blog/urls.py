@@ -20,6 +20,7 @@ urlpatterns = [
     path('blog/posts/', views.post_list, name='post_list'),
     path('blog/post/<int:post_id>/<str:title_post>', views.post, name='post'),
     path('blog/post/create/', views.create_post, name='create_post'),
+    # path('blog/post/create/', views.create_post_v2, name='create_post'),
     path('blog/post/edit/<int:post_id>', views.post_edit, name='post_edit'),
     path('blog/post/delete/<int:post_id>', views.post_delete, name='post_delete'),
 
@@ -32,6 +33,7 @@ urlpatterns = [
 
     # -----------  APIs -----------
     path('api/v1/login/', views.login_api_v1, name='login_api_v1'),
+    path('api/v1/check-user/<str:username>/<str:password>', views.api_check_user_v1, name='api_check_user_v1'),
     path('api/post-mertics/', views.api_post_metrics, name='api_post_metrics'),
     path('api/post-like/', views.api_post_like, name='api_post_like'),
 ]

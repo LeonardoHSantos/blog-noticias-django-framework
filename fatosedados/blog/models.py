@@ -55,7 +55,7 @@ class Contact(models.Model):
     email = models.EmailField()
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-
+    
     def __str__(self):
         return f"Contato de {self.name} - {self.email} em {self.created_at.strftime('%Y-%m-%d %H:%M')}"
 

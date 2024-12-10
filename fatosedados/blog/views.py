@@ -179,6 +179,28 @@ def create_post(request):
         return redirect('post_list')
     
     return render(request, 'blog/create_post.html')
+def create_post_v2(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        author = request.POST.get('author')
+        content = request.POST.get('content')
+        cover_image = request.FILES.get('cover_image')  # Supondo que o campo de imagem esteja no formulário
+
+        if not all([title, author, content, cover_image]):
+            return JsonResponse({"statusCode": 400, "msg": "Todos os campos obrigatórios devem ser preenchidos."})
+
+        post = Post.objects.create(
+            title=title,
+            author=author,
+            content=content,
+            cover_image=cover_image,
+            created_at=datetime.now(),
+            user=request.user,
+        )
+
+        return redirect('post_list')
+    
+    return render(request, 'blog/post_create.html')
 # ---
 def remove_images(old_image_dir):
     try:
@@ -263,7 +285,7 @@ def post(request, post_id, title_post):
         postFilter = Post.objects.all().filter(id=post_id).first()
         postFilter.number_of_visitors += 1
         postFilter.save()
-
+        
         latest_posts = Post.objects.all().exclude(id=post_id).order_by("-created_at")[:3]
         for post in latest_posts: post.alternative_title = slugify(post.title)
 
@@ -331,6 +353,20 @@ def login_api_v1(request):
             return JsonResponse({"code": 200, "message": "Autenticado com sucesso!"})
         else:
             return JsonResponse({"code": 404, "message": "Usuário ou senha incorretos."})
+        
+    return JsonResponse({"code": 400, "message": "bad request"})
+
+def api_check_user_v1(request, username, password):
+    if request.method == "GET":
+        
+        if username == "" or password == "":
+            return JsonResponse({"code": 404, "message": "Informe todos os campos."})
+        
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            return JsonResponse({"code": 200, "message": "is_valid"})
+        else:
+            return JsonResponse({"code": 404, "message": "user_error"})
         
     return JsonResponse({"code": 400, "message": "bad request"})
            
