@@ -40,50 +40,74 @@ INSTALLED_APPS = [
 
 # Content Security Policy no settings.py
 
-CSP_DEFAULT_SRC = ("'self'",)
-CSP_STYLE_SRC = ("'self'", "'unsafe-inline'", "https://fonts.googleapis.com")
-CSP_FONT_SRC = ("'self'", "https://fonts.gstatic.com")
+CSP_DEFAULT_SRC = (
+    "'self'", 
+    "'unsafe-inline'", 
+    "'unsafe-eval'",  # Necessário para permitir certas funcionalidades JavaScript
+)
+
+CSP_STYLE_SRC = (
+    "'self'", 
+    "'unsafe-inline'", 
+    "https://fonts.googleapis.com",  # Google Fonts
+)
+
+CSP_FONT_SRC = (
+    "'self'", 
+    "https://fonts.gstatic.com",  # Fontes do Google
+)
+
 CSP_SCRIPT_SRC = (
-    "'self'",
-    "'unsafe-inline'",
+    "'self'", 
+    "'unsafe-inline'", 
+    "'unsafe-eval'",  # Necessário para alguns scripts
     "https://pagead2.googlesyndication.com",  # Scripts de anúncios do Google
     "https://ep2.adtrafficquality.google",    # Scripts de anúncios do Google
-    "https://www.googletagmanager.com",       # Tag manager
+    "https://www.googletagmanager.com",       # Google Tag Manager
+    "https://www.google-analytics.com",       # Google Analytics
     "https://cdn.jsdelivr.net",               # CDN para JS (se estiver usando)
+    "https://www.gstatic.com",                # Google-related scripts
+    "https://securepubads.g.doubleclick.net", # Outros domínios de anúncios do Google
 )
+
 CSP_FRAME_SRC = (
-    "'self'",
+    "'self'", 
     "https://googleads.g.doubleclick.net",  # Google Ads
     "https://ep2.adtrafficquality.google",  # Google Ads
     "https://www.google.com",               # Google
     "https://td.doubleclick.net",           # DoubleClick
+    "https://securepubads.g.doubleclick.net", # Adicional para o Google Ads
+    "https://www.gstatic.com",              # Scripts relacionados a Google Ads
 )
 
-# **Adicione a diretiva frame-ancestors**
 CSP_FRAME_ANCESTORS = (
     "'self'",  # Permitir embutir apenas em seu próprio domínio
     "https://www.google.com",  # Permitir embutir em iframes do Google
     "https://googleads.g.doubleclick.net",  # Permitir iframes do Google Ads
+    "https://securepubads.g.doubleclick.net", # Adicional para anúncios do Google
 )
 
 CSP_CONNECT_SRC = (
-    "'self'",
+    "'self'", 
     "https://ep1.adtrafficquality.google",      # Google Ads
     "https://csi.gstatic.com",                   # Conexões de script de anúncios
     "https://www.google-analytics.com",          # Google Analytics
     "https://analytics.google.com",              # Analytics
     "https://stats.g.doubleclick.net",           # DoubleClick
     "https://pagead2.googlesyndication.com",     # Google Ads
+    "https://googleads.g.doubleclick.net",       # Conexões para Google Ads
 )
 
 CSP_IMG_SRC = (
-    "'self'",
-    "data:",
-    "https://ep1.adtrafficquality.google",
-    "https://pagead2.googlesyndication.com",
-    "https://www.google.com.br",
-    "https://www.google.com",  # Google Images
-    "https://www.googletagmanager.com",  # Permitir imagens do Google Tag Manager
+    "'self'", 
+    "data:",  # Permitir imagens em base64
+    "https://ep1.adtrafficquality.google",  # Google Ads
+    "https://pagead2.googlesyndication.com", # Google Ads
+    "https://www.google.com.br",             # Google Imagens
+    "https://www.google.com",                # Google Images
+    "https://www.googletagmanager.com",      # Imagens do Google Tag Manager
+    "https://securepubads.g.doubleclick.net", # Google Ads
+    "https://www.gstatic.com",               # Outros recursos de imagem do Google
 )
 
 
