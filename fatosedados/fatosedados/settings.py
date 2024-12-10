@@ -68,6 +68,7 @@ CSP_SCRIPT_SRC = (
     "https://cdn.jsdelivr.net",               # CDN para JS (se estiver usando)
     "https://www.gstatic.com",                # Google-related scripts
     "https://securepubads.g.doubleclick.net", # Outros domínios de anúncios do Google
+    "https://www.google.com",
 )
 
 CSP_FRAME_SRC = (
@@ -96,6 +97,8 @@ CSP_CONNECT_SRC = (
     "https://stats.g.doubleclick.net",           # DoubleClick
     "https://pagead2.googlesyndication.com",     # Google Ads
     "https://googleads.g.doubleclick.net",       # Conexões para Google Ads
+    "https://www.googletagmanager.com",          # Adicionar mais URLs do Google Tag Manager
+    "https://www.gstatic.com",                   # URLs relacionadas aos recursos do Google
 )
 
 CSP_IMG_SRC = (
