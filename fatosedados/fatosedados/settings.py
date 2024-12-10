@@ -81,6 +81,15 @@ CSP_FRAME_SRC = (
     "https://www.gstatic.com",              # Scripts relacionados a Google Ads
 )
 
+CSP_FENCED_FRAME_SRC = (
+    "'self'", 
+    "https://googleads.g.doubleclick.net",  # Google Ads
+    "https://ep2.adtrafficquality.google",  # Google Ads
+    "https://www.google.com",               # Google
+    "https://td.doubleclick.net",           # DoubleClick
+    "https://securepubads.g.doubleclick.net", # Google Ads
+)
+
 CSP_FRAME_ANCESTORS = (
     "'self'",  # Permitir embutir apenas em seu próprio domínio
     "https://www.google.com",  # Permitir embutir em iframes do Google
@@ -112,6 +121,7 @@ CSP_IMG_SRC = (
     "https://securepubads.g.doubleclick.net", # Google Ads
     "https://www.gstatic.com",               # Outros recursos de imagem do Google
 )
+
 
 
 AUTH_USER_MODEL = 'blog.UserRegistration'

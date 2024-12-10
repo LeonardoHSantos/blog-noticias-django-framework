@@ -4,7 +4,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-    height: 100vh; /* Ocupa a altura total da tela */
+    /* min-height: 100vh; */
     max-width: 100%;
     padding: 10px;
 }
