@@ -116,6 +116,9 @@ CSP_IMG_SRC = (
     "https://www.gstatic.com",  # Outros recursos de imagem do Google
 )
 
+CSP_OBJECT_SRC = (
+    "'none'",  # Prevenindo que outros objetos sejam carregados
+)
 
 
 AUTH_USER_MODEL = 'blog.UserRegistration'
