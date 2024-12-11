@@ -170,13 +170,13 @@ button[type="submit"]:hover {
     }
     .sidebar h2 {
         margin: 0;
-        font-size: 1rem;
+        font-size: 1.4rem;
     }
     .sidebar li {
         margin: 0;
     }
     .sidebar button {
-        font-size: 0.800rem;
+        font-size: 1rem;
     }
     .main-content {
         padding: 0;
