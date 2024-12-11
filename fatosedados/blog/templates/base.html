@@ -45,7 +45,7 @@
 </html>
 
 
-<script>
+<script defer>
     function popupShow(){
         const container_popup = document.querySelector(".container-popup");
         window.scroll(0,0);
@@ -63,7 +63,7 @@
 
 </script>
 
-<script>
+<script defer>
     // Função para verificar se o usuário já aceitou os cookies
     function checkCookieConsent() {
       // Verificar se o consentimento de cookies foi armazenado no localStorage
@@ -118,11 +118,32 @@
 </script>
 
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CJS2HECV98"></script>
-<script>
+<script defer id="gtag-script">
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-CJS2HECV98');
+</script>
+
+<script defer>
+  // Função para ativar o Google Tag Manager depois do consentimento
+  function enableGoogleTagManager() {
+    const script = document.createElement('script');
+    script.src = "https://www.googletagmanager.com/gtag/js?id=G-CJS2HECV98";
+    script.async = true;
+    document.head.appendChild(script);
+  }
+
+  // Função para ativar os cookies
+  function enableCookies() {
+    // Aqui você ativa o GTAG e outros serviços como Google Analytics
+    enableGoogleTagManager();
+  }
+
+  // Verifica o consentimento de cookies do usuário
+  document.getElementById('accept-cookies').onclick = function() {
+    localStorage.setItem('cookiesAccepted', 'true');
+    document.getElementById('cookie-banner').style.display = 'none'; // Ocultar banner
+    enableCookies(); // Ativar scripts do Google
+  };
 </script>

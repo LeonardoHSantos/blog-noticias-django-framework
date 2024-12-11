@@ -62,8 +62,7 @@ CSP_SCRIPT_SRC = (
     "'unsafe-inline'", 
     "'unsafe-eval'",  # Necessário para alguns scripts
     "https://pagead2.googlesyndication.com",  # Scripts de anúncios do Google
-    "https://ep2.adtrafficquality.google",  # Scripts de anúncios do Google
-    "https://www.googletagmanager.com",  # Gerenciador de tags do Google
+    "https://www.googletagmanager.com",  # Google Tag Manager
     "https://www.google-analytics.com",  # Google Analytics
     "https://cdn.jsdelivr.net",  # CDN para JS (se estiver usando)
     "https://www.gstatic.com",  # Scripts relacionados ao Google
@@ -99,18 +98,7 @@ CSP_CONNECT_SRC = (
     "https://googleads.g.doubleclick.net",  # Conexões para Google Ads
     "https://www.googletagmanager.com",  # Google Tag Manager
     "https://www.gstatic.com",  # URLs relacionadas aos recursos do Google
-)
-
-CSP_IMG_SRC = (
-    "'self'", 
-    "data:",  # Permitir imagens em base64
-    "https://ep1.adtrafficquality.google",  # Google Ads
-    "https://pagead2.googlesyndication.com",  # Google Ads
-    "https://www.google.com.br",  # Google Imagens
-    "https://www.google.com",  # Google Imagens
-    "https://www.googletagmanager.com",  # Imagens do Google Tag Manager
-    "https://securepubads.g.doubleclick.net",  # Google Ads
-    "https://www.gstatic.com",  # Outros recursos de imagem do Google
+    "https://www.google.com.br/ads/ga-audiences",  # Adicionando o domínio de auditoria do Google Ads
 )
 
 CSP_IMG_SRC = (
