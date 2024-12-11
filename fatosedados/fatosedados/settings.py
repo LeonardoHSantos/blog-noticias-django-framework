@@ -60,14 +60,16 @@ CSP_FONT_SRC = (
 CSP_SCRIPT_SRC = (
     "'self'", 
     "'unsafe-inline'", 
-    "'unsafe-eval'",  # Necessário para alguns scripts
-    "https://pagead2.googlesyndication.com",  # Scripts de anúncios do Google
-    "https://www.googletagmanager.com",  # Google Tag Manager
-    "https://www.google-analytics.com",  # Google Analytics
-    "https://cdn.jsdelivr.net",  # CDN para JS (se estiver usando)
-    "https://www.gstatic.com",  # Scripts relacionados ao Google
-    "https://securepubads.g.doubleclick.net",  # Outros domínios de anúncios do Google
-    "https://www.google.com",  # Outros scripts Google
+    "'unsafe-eval'",  
+    "https://pagead2.googlesyndication.com",  
+    "https://www.googletagmanager.com",  
+    "https://www.google-analytics.com",  
+    "https://cdn.jsdelivr.net",  
+    "https://www.gstatic.com",  
+    "https://securepubads.g.doubleclick.net",  
+    "https://www.google.com",  
+    "https://ep2.adtrafficquality.google",  # Adicionando para permitir o script de anúncios
+    "https://ep2.adtrafficquality.google/sodar/sodar2.js",  # Adicionando o script específico
 )
 
 CSP_FRAME_SRC = (
@@ -89,16 +91,17 @@ CSP_FRAME_ANCESTORS = (
 
 CSP_CONNECT_SRC = (
     "'self'", 
-    "https://ep1.adtrafficquality.google",  # Google Anúncios
-    "https://csi.gstatic.com",  # Conexões de script de anúncios
-    "https://www.google-analytics.com",  # Google Analytics
-    "https://analytics.google.com",  # Analytics
-    "https://stats.g.doubleclick.net",  # DoubleClick
-    "https://pagead2.googlesyndication.com",  # Google Ads
-    "https://googleads.g.doubleclick.net",  # Conexões para Google Ads
-    "https://www.googletagmanager.com",  # Google Tag Manager
-    "https://www.gstatic.com",  # URLs relacionadas aos recursos do Google
-    "https://www.google.com.br/ads/ga-audiences",  # Adicionando o domínio de auditoria do Google Ads
+    "https://ep1.adtrafficquality.google",  
+    "https://csi.gstatic.com",  
+    "https://www.google-analytics.com",  
+    "https://analytics.google.com",  
+    "https://stats.g.doubleclick.net",  
+    "https://pagead2.googlesyndication.com",  
+    "https://googleads.g.doubleclick.net",  
+    "https://www.googletagmanager.com",  
+    "https://www.gstatic.com",  
+    "https://www.google.com.br/ads/ga-audiences",  
+    "https://ep2.adtrafficquality.google",  # Adicionando domínio para conexões de anúncios
 )
 
 CSP_IMG_SRC = (
