@@ -41,84 +41,73 @@ INSTALLED_APPS = [
 # Content Security Policy no settings.py
 
 CSP_DEFAULT_SRC = (
-    "'self'", 
-    "'unsafe-inline'", 
-    "'unsafe-eval'",  # Necessário para permitir certas funcionalidades JavaScript
+    "'self'",
+    "'unsafe-inline'",
+    "'unsafe-eval'",
 )
 
 CSP_STYLE_SRC = (
-    "'self'", 
-    "'unsafe-inline'", 
-    "https://fonts.googleapis.com",  # Google Fonts
+    "'self'",
+    "'unsafe-inline'",
+    "https://fonts.googleapis.com",
 )
 
 CSP_FONT_SRC = (
-    "'self'", 
-    "https://fonts.gstatic.com",  # Fontes do Google
+    "'self'",
+    "https://fonts.gstatic.com",
 )
 
 CSP_SCRIPT_SRC = (
-    "'self'", 
-    "'unsafe-inline'", 
-    "'unsafe-eval'",  
-    "https://pagead2.googlesyndication.com",  
-    "https://www.googletagmanager.com",  
-    "https://www.google-analytics.com",  
-    "https://cdn.jsdelivr.net",  
-    "https://www.gstatic.com",  
-    "https://securepubads.g.doubleclick.net",  
-    "https://www.google.com",  
-    "https://ep2.adtrafficquality.google",  # Adicionando para permitir o script de anúncios
-    "https://ep2.adtrafficquality.google/sodar/sodar2.js",  # Adicionando o script específico
+    "'self'",
+    "'unsafe-inline'",
+    "'unsafe-eval'",
+    "https://pagead2.googlesyndication.com",
+    "https://ep2.adtrafficquality.google",
+    "https://www.googletagmanager.com",
+    "https://cdn.jsdelivr.net",
+    "https://www.gstatic.com",
+    "https://securepubads.g.doubleclick.net",
 )
 
 CSP_FRAME_SRC = (
-    "'self'", 
-    "https://googleads.g.doubleclick.net",  # Google Ads
-    "https://ep2.adtrafficquality.google",  # Google Ads
-    "https://www.google.com",  # Google
-    "https://td.doubleclick.net",  # DoubleClick
-    "https://securepubads.g.doubleclick.net",  # Adicional para o Google Ads
-    "https://www.gstatic.com",  # Scripts relacionados ao Google Ads
+    "'self'",
+    "https://googleads.g.doubleclick.net",
+    "https://ep2.adtrafficquality.google",
+    "https://www.google.com",
+    "https://td.doubleclick.net",
+    "https://securepubads.g.doubleclick.net",
 )
 
 CSP_FRAME_ANCESTORS = (
-    "'self'",  # Permitir embutir apenas em seu próprio domínio
-    "https://www.google.com",  # Permitir embutir em iframes do Google
-    "https://googleads.g.doubleclick.net",  # Permitir iframes do Google Ads
-    "https://securepubads.g.doubleclick.net",  # Adicional para anúncios do Google
+    "'self'",
+    "https://www.google.com",
+    "https://googleads.g.doubleclick.net",
 )
 
 CSP_CONNECT_SRC = (
-    "'self'", 
-    "https://ep1.adtrafficquality.google",  
-    "https://csi.gstatic.com",  
-    "https://www.google-analytics.com",  
-    "https://analytics.google.com",  
-    "https://stats.g.doubleclick.net",  
-    "https://pagead2.googlesyndication.com",  
-    "https://googleads.g.doubleclick.net",  
-    "https://www.googletagmanager.com",  
-    "https://www.gstatic.com",  
-    "https://www.google.com.br/ads/ga-audiences",  
-    "https://ep2.adtrafficquality.google",  # Adicionando domínio para conexões de anúncios
+    "'self'",
+    "https://ep1.adtrafficquality.google",
+    "https://csi.gstatic.com",
+    "https://www.google-analytics.com",
+    "https://analytics.google.com",
+    "https://stats.g.doubleclick.net",
+    "https://pagead2.googlesyndication.com",
+    "https://googleads.g.doubleclick.net",
+    "https://www.googletagmanager.com",
 )
 
 CSP_IMG_SRC = (
-    "'self'", 
-    "data:",  # Permitir imagens em base64
-    "https://ep1.adtrafficquality.google",  # Google Ads
-    "https://pagead2.googlesyndication.com",  # Google Ads
-    "https://www.google.com.br",  # Google Imagens
-    "https://www.google.com",  # Google Imagens
-    "https://www.googletagmanager.com",  # Imagens do Google Tag Manager
-    "https://securepubads.g.doubleclick.net",  # Google Ads
-    "https://www.gstatic.com",  # Outros recursos de imagem do Google
+    "'self'",
+    "data:",
+    "https://ep1.adtrafficquality.google",
+    "https://pagead2.googlesyndication.com",
+    "https://www.google.com.br",
+    "https://www.google.com",
+    "https://www.googletagmanager.com",
+    "https://securepubads.g.doubleclick.net",
+    "https://www.gstatic.com",
 )
 
-CSP_OBJECT_SRC = (
-    "'none'",  # Prevenindo que outros objetos sejam carregados
-)
 
 
 AUTH_USER_MODEL = 'blog.UserRegistration'
