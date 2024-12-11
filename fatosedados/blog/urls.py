@@ -23,7 +23,7 @@ urlpatterns = [
     path('blog/post/create/', views.create_post_v2, name='create_post'),
     path('blog/post/edit/<int:post_id>', views.post_edit, name='post_edit'),
     path('blog/post/delete/<int:post_id>', views.post_delete, name='post_delete'),
-
+    
     # ---- GOOGLE ADS
     path('ads.txt', views.ads_txt_view, name='ads_txt'),
 
@@ -36,6 +36,10 @@ urlpatterns = [
     path('api/v1/check-user/<str:username>/<str:password>', views.api_check_user_v1, name='api_check_user_v1'),
     path('api/post-mertics/', views.api_post_metrics, name='api_post_metrics'),
     path('api/post-like/', views.api_post_like, name='api_post_like'),
+
+    # GROQ
+    path('api/groq/v1/generate-post-text-with-groq-IA/', views.api_v1_generate_post_text_with_groq_IA, name='api_v1_generate_post_text_with_groq_IA'),
+
 ]
 
 if not settings.DEBUG:

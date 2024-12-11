@@ -21,7 +21,7 @@
             </div>        
         {% else %}
             
-            <form action="{% url 'post_delete' post.id %}" method="post" enctype="multipart/form-data" class="contact-form">
+            <form action="{% url 'post_delete' post.id %}" method="post" enctype="multipart/form-data" class="generic-form">
                 {% csrf_token %}
                 <div class="input">
                     <label for="title">Título</label>

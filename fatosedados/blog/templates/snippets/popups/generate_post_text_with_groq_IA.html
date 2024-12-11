@@ -1,0 +1,61 @@
+{% load static %}
+<div class="block-user-account">
+    <div class="contact-container">
+        <div class="header-form">
+            <h1>Gerar Texto com IA</h1>
+        </div>
+    </div>
+    <form class="generic-form" id="popupForm">
+        <div class="input">
+            <label for="context_to_ia">Contexto para IA</label>
+            <input type="text" name="context_to_ia" id="context_to_ia" required placeholder="Escreva um texto curto sobre o conteúdo desejado">
+        </div>
+
+        <div>
+            <p class="message-form">Error</p>
+        </div>
+
+        <div class="input">
+            <button type="submit">Gerar</button>
+        </div>
+        <div class="input">
+            <button type="button" style="background-color: black;" onclick="popupClose(this);">Cancelar</button>
+        </div>
+    </form>
+
+</div>
+
+<script>
+    // Função que previne o envio do formulário e faz a requisição fetch
+    document.getElementById('popupForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Impede o envio padrão do formulário
+
+        const context_to_ia = document.getElementById('context_to_ia').value;
+        const message_form = document.querySelector(".message-form");
+        message_form.textContent = "";
+
+        fetch('{% url "api_v1_generate_post_text_with_groq_IA" %}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify({ context_to_ia: context_to_ia })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            if (data.statusCode == 200) {
+                message_form.textContent = "";
+                document.getElementById("content").value = data["data"]["content"];
+                popupClose();
+            } else {
+                message_form.textContent = data.message;
+                message_form.style.color = "red";
+            }
+        })
+        .catch(error => {
+            console.error('Erro na requisição:', error);
+        });
+    });
+</script>

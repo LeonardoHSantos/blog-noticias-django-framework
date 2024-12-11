@@ -1,71 +1,104 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} Novo Post {% endblock %}
+{% block title %} Editar Post {% endblock %}
 
 {% block content %}
-<div class="contact-container">
-    <div class="header-form">
-        <h1>Editar Post</h1>
-        <!-- <p>Entre em contato conosco preenchendo o formulário abaixo:</p> -->
-    </div>
 
-    {% if post.no_access_post %}
-        <div style="height: 20vh; display: flex; flex-direction: row; justify-content: center; align-items: center;">
-            <h3>Você não tem permissão para editar esse Post.</h3>
-        </div>
-    {% else %}
-        <form action="{% url 'post_edit' post.id %}" method="post" enctype="multipart/form-data" class="contact-form">
+<div class="container-popup">
+    {% include 'snippets/popups/generate_post_text_with_groq_IA.html' %}
+</div>
+
+<div class="container">
+    <!-- Barra de Ferramentas -->
+    <div class="sidebar">
+        <h2>Ferramentas</h2>
+        <ul>
+            <li><button onclick="popupShow(this);">
+                <span>Gerar Texto com IA</span>
+                <i class="fa-solid fa-brain"></i>
+            </button></li>
+        </ul>
+    </div>
+    
+    <div class="main-content">
+        <h1>Editar Post</h1>
+        <form action="{% url 'post_edit' post_id=post.pk %}" class="generic-form" enctype="multipart/form-data" method="POST">
             {% csrf_token %}
             <div class="input">
-                <label for="title">Título</label>
+                <label for="title">Título do Post</label>
                 <input type="text" id="title" name="title" value="{{ post.title }}" required>
             </div>
 
-            <div class="input">
-                <label for="author">Autor</label>
-                <input type="text" id="author" name="author" value="{{ post.author }}" required readonly>
+            <div class="post-image">
+                <img id="preview_image" class="" src="{{ post.cover_image.url }}" alt="{{ post.cover_image }}">
             </div>
 
             <div class="input">
-                <label for="content">Conteúdo</label>
-                <textarea id="content" name="content" rows="5" required>{{ post.content }}</textarea>
-            </div>
-
-            {% if post.cover_image %}
-                <div class="input-image">
-                    <img src="{{ post.cover_image.url }}" id="preview_image" alt="Imagem de Capa Atual" style="max-width: 200px; height: auto;">
-                </div>
-            {% endif %}
-            
-            <div class="input">
-                <label for="content">Imagem de Capa</label>
+                <label for="cover_image">Imagem</label>
                 <input type="file" id="cover_image" name="cover_image" accept="image/*">
             </div>
+            <div class="input">
+                <label for="content">Conteúdo</label>
+                <textarea id="content" name="content" rows="10" required>{{ post.content }}</textarea>
+            </div>
+            <div class="input">
+                <label for="category">Categoria</label>
+                <select id="category" name="category" required>
+                    {% for k,v in categories.items %}
+                        <option value="{{ k }}" {% if post.category == k %} selected {% endif %} >{{ v }}</option>
+                    {% endfor %}
+                </select>
+            </div>
 
-            <button type="submit">Salvar Post</button>
-            
-            <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
-                <a href="{% url 'post_list' %}"
-                    style="
-                        text-decoration: none;
-                        color: white;
-                        font-size: 1rem;
-                        width: 100%;
-                        background: black;
-                        display: flex;
-                        flex-direction: row;
-                        justify-content: center;
-                        align-items: center;
-                        padding: 12px 0px;
-                        border-radius: 4px;
-                    "
-                >Voltar</a>
+            <div>
+                {% if form_error %}
+                    <p class="content-error">{{ error }}</p>
+                {% endif %}
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">
+
+                <button type="submit">Salvar</button>
+                <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+                    <a href="{% url 'post_list' %}"
+                        style="
+                            text-decoration: none;
+                            color: white;
+                            font-size: 1rem;
+                            width: 100%;
+                            background: black;
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: center;
+                            align-items: center;
+                            padding: 12px 0px;
+                            border-radius: 4px;
+                        "
+                    >Voltar</a>
+                </div>
+
             </div>
 
         </form>
-    {% endif %}
+    </div>
 </div>
 
+
+<script>
+    function previewImagem(){
+        // Verifica se o src da imagem está vazio
+        const postImageDiv = document.getElementById("preview_image");
+
+        if (postImageDiv.src != window.location.href) {
+            postImageDiv.classList.add("active");
+        } else {
+            postImageDiv.classList.remove("active");
+        }
+    }
+    window.onload = function() {
+        previewImagem();
+    };
+</script>
 
 <script>
     document.getElementById('cover_image').addEventListener('change', function (event) {
@@ -77,10 +110,12 @@
 
             reader.onload = function (e) {
                 previewImage.src = e.target.result; // Define o novo src da imagem
+                document.getElementById("preview_image").classList.add("active");
             };
 
             reader.readAsDataURL(input.files[0]); // Lê o arquivo como DataURL
         }
     });
 </script>
+
 {% endblock %}

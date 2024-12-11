@@ -13,7 +13,10 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Post, PostImage, Contact, UserRegistration, PostMetrics
 from .models import Like, Comment
+from .models import POST_CATEGORIES
 from .utils import PrepareDataToMetrics
+
+from groq import Groq
 
 
 def home(request):
@@ -179,28 +182,52 @@ def create_post(request):
         return redirect('post_list')
     
     return render(request, 'blog/create_post.html')
+
 def create_post_v2(request):
+
+    categories = dict(POST_CATEGORIES)
+    context = {
+        "categories": categories
+    }
+
+    print(context)
+    print(categories.keys())
+    print("Technolog" in categories.keys())
     if request.method == 'POST':
         title = request.POST.get('title')
-        author = request.POST.get('author')
+        author = request.user.name
         content = request.POST.get('content')
         cover_image = request.FILES.get('cover_image')  # Supondo que o campo de imagem esteja no formulário
+        category = request.POST.get('category')
 
-        if not all([title, author, content, cover_image]):
-            return JsonResponse({"statusCode": 400, "msg": "Todos os campos obrigatórios devem ser preenchidos."})
+        context["title"] = title
+        context["author"] = author
+        context["content"] = content
+        context["cover_image"] = cover_image
+        context["category"] = category
+
+        if not all([title, author, content, category, cover_image]):
+            context["form_error"] = True
+            context["error"] = "Todos os campos devem ser preenchidos."
+            return render(request, 'blog/post_create.html', status=400, context=context)
+        if category not in categories.keys():
+            context["form_error"] = True
+            context["error"] = "Por favor, revise os campos do formulário."
+            return render(request, 'blog/post_create.html', status=422, context=context)
+
 
         post = Post.objects.create(
             title=title,
             author=author,
             content=content,
+            category=category,
             cover_image=cover_image,
             created_at=datetime.now(),
             user=request.user,
         )
-
-        return redirect('post_list')
+        return redirect('post', post_id=post.pk, title_post=slugify(title))
     
-    return render(request, 'blog/post_create.html')
+    return render(request, 'blog/post_create.html', context=context)
 # ---
 def remove_images(old_image_dir):
     try:
@@ -218,33 +245,50 @@ def remove_images(old_image_dir):
 def post_edit(request, post_id):
 
     postFilter = Post.objects.all().filter(id=post_id).first()
+    if postFilter is None:
+        return render(request, "404.html")
+    
+    categories = dict(POST_CATEGORIES)
+    context = {
+        "categories": categories
+    }
 
     if request.method == "POST":
 
-        title = request.POST.get("title")
-        author = request.POST.get("author")
-        content = request.POST.get("content")
-        cover_image = request.FILES.get('cover_image')
+        try:
+            title = request.POST.get("title")
+            content = request.POST.get("content")
+            category = request.POST.get("category")
+            cover_image = request.FILES.get('cover_image')
 
-        postFilter.title=title
-        postFilter.author=author
-        postFilter.content=content
+            postFilter.title=title
+            postFilter.content=content
+            postFilter.category=category
 
-        # Atualiza diretório de imagem apenas se houver alguma imagem no input do formulário HTML.
-        if cover_image:
-            old_image_path = postFilter.cover_image.path
-            old_image_dir = os.path.dirname(old_image_path)
-            remove_images(old_image_dir=old_image_dir)
-            postFilter.cover_image=cover_image
-            print(f"\n\n ------------ IMAGEM ATUALIZADA | ID: {postFilter.pk} ------------ ")
-        
-        postFilter.save()
-   
-        return render(request, 'blog/post_edit.html', context={"post": postFilter})
+            # Atualiza diretório de imagem apenas se houver alguma imagem no input do formulário HTML.
+            if cover_image:
+                old_image_path = postFilter.cover_image.path
+                old_image_dir = os.path.dirname(old_image_path)
+                remove_images(old_image_dir=old_image_dir)
+                postFilter.cover_image=cover_image
+                print(f"\n\n ------------ IMAGEM ATUALIZADA | ID: {postFilter.pk} ------------ ")
+            
+            postFilter.save()
+
+            context["post"] = postFilter
+            return render(request, 'blog/post_edit.html', context=context)
+        except Exception as e:
+            print(f"\n\n ERROR PROCESS FORM | ERROR: {e}")
+            context["post"] = postFilter
+            context["form_error"] = True
+            context["error"] = "Error ao processar o formulário! Tente novamente."
+            return render(request, 'blog/post_edit.html', context=context)
+
     
     elif request.method == "GET":
         if postFilter.user.id == request.user.pk:
-            return render(request, 'blog/post_edit.html', context={"post": postFilter})
+            context["post"] = postFilter
+            return render(request, 'blog/post_edit.html', context=context)
         else:
             return render(request, 'blog/post_edit.html', context={"post": {
                 "no_access_post": True
@@ -255,34 +299,49 @@ def post_edit(request, post_id):
 def post_delete(request, post_id):
 
     postFilter = Post.objects.all().filter(id=post_id).first()
-    
-    if request.method == "GET":
-        if postFilter.user.id == request.user.pk:
-            return render(request, 'blog/post_delete.html', context={"post": postFilter})
-        else:
-            return render(request, 'blog/post_delete.html', context={"post": {
-                "no_access_post": True
-            }})
-    elif request.method == "POST":
-        print(postFilter)
-        if postFilter.user.id == request.user.pk:
-            postFilter.delete()
-            print(f" --------------------- POST DELETADO COM SUCESSO --------------------- ")
-           
-            return render(request, 'blog/post_delete.html', context={"post": {
-                "delete_success_post": True
-            }})
-        else:
-            return JsonResponse({"error": "Você não tem permissão para deletar este post."}, status=403)
+    print("\n -------------------- postFilter -------------------- ")
+    print(postFilter)
+    if postFilter is not None:
+        if request.method == "GET":
+            try:
+                if postFilter.user.id == request.user.pk:
+                    return render(request, 'blog/post_delete.html', context={"post": postFilter})
+                else:
+                    return render(request, 'blog/post_delete.html', context={"post": {
+                        "no_access_post": True
+                    }})
+            except:
+                return redirect("post_list")
+        elif request.method == "POST":
+            print(postFilter)
+            try:
+                if postFilter.user.id == request.user.pk:
+                    postFilter.delete()
+                    print(f" --------------------- POST DELETADO COM SUCESSO --------------------- ")
+                
+                    return render(request, 'blog/post_delete.html', context={"post": {
+                        "delete_success_post": True
+                    }})
+                else:
+                    return JsonResponse({"error": "Você não tem permissão para deletar este post."}, status=403)
+            except:
+                return redirect("post_list")
     
     else:
-        return JsonResponse({"404": "not-found"})
+        print(" ----------- REDIRECIONAR ")
+        return redirect("post_list")
+    
+    # else:
+    #     return JsonResponse({"404": "not-found"})
 
 def post(request, post_id, title_post):
 
     if request.method == "GET":
 
         postFilter = Post.objects.all().filter(id=post_id).first()
+        if postFilter is None:
+            return render(request, "404.html")
+
         postFilter.number_of_visitors += 1
         postFilter.save()
         
@@ -417,3 +476,46 @@ def api_post_like(request):
     return JsonResponse({
         "code": 404, "msg": "page not found"
     })
+
+
+def api_v1_generate_post_text_with_groq_IA(request):
+    try:
+        if request.method == "POST":
+
+            data = json.loads(request.body)
+            user = request.user
+            context_to_ia = data["context_to_ia"].strip()
+
+            if user and user.id:
+                context_to_ia = f"""
+                    {os.getenv("GROQ_PRE_CONFIG_PROMPT")}
+                    {context_to_ia}
+                """
+                
+                client = Groq(api_key=os.getenv('GROQ_API_KEY_1'))
+                data = {"role": "user", "content": context_to_ia}
+                chat_completion = client.chat.completions.create(
+                    messages=[data],
+                    model=os.getenv("GROQ_API_MODEL"),
+                    stream=False,
+                )
+                return JsonResponse({
+                    "statusCode": 200,
+                    "data": {
+                        "content": chat_completion.choices[0].message.content,
+                        "context_to_ia": context_to_ia, 
+                    }
+                })
+        return JsonResponse({
+            "statusCode": 404,
+            "message": "not found"
+        })
+    except Exception as e:
+        print(f"\n ERROR GENERATE TEXT WITH GROQ IA | ERROR: {e}")
+    
+        return JsonResponse({
+            "statusCode": 400,
+            "message": "bad request"
+        })
+
+

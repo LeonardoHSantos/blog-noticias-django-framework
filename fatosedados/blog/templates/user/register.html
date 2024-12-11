@@ -21,7 +21,7 @@
             <p>Crie sua conta</p>
         </div>
 
-        <form action="{% url 'register' %}" method="post" class="contact-form">
+        <form action="{% url 'register' %}" method="post" class="generic-form">
             {% csrf_token %}
             <div class="input">
                 <label for="name">Nome</label>

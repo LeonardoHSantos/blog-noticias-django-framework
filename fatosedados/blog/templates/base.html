@@ -51,6 +51,9 @@
         window.scroll(0,0);
         container_popup.classList.add("active");
         document.body.style.overflow = "hidden";
+        try {
+          document.querySelector(".message-form").textContent = "";
+        } catch (error) {console.log(error)}
     }
     function popupClose(){
         const container_popup = document.querySelector(".container-popup");

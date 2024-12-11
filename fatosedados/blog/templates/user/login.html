@@ -19,7 +19,7 @@
         <p>Entre em sua conta</p>
     </div>
 
-    <form action="{% url 'login' %}" method="post" class="contact-form">
+    <form action="{% url 'login' %}" method="post" class="generic-form">
         {% csrf_token %}
         
         <div class="input">

@@ -7,6 +7,14 @@ from django.utils import timezone
 from django.contrib.auth.hashers import make_password
 from django.conf import settings
 
+
+POST_CATEGORIES = (
+    ("Technology", "Tecnologia"),
+    ("Economy", "Economia"),
+    ("Policy", "Política"),
+    ("uncategorized", "Nenhuma"),
+)
+
 class UserRegistrationManager(BaseUserManager):
     def create_user(self, email, name, password=None):
         if not email:
@@ -101,11 +109,12 @@ def upload_to_additional(instance, filename):
 class Post(models.Model):
     title = models.CharField(max_length=100)
     author = models.CharField(max_length=50)
-    content = models.TextField()
+    content = models.TextField(max_length=5000)
     created_at = models.DateTimeField(auto_now_add=True)
     cover_image = models.ImageField(upload_to=upload_to_cover, blank=True, null=True)  # Imagem principal do post
     number_of_visitors = models.IntegerField(default=0)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    category = models.CharField(max_length=125, blank=False, null=False, default="uncategorized")
 
     def __str__(self):
         return self.title
