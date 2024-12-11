@@ -646,4 +646,14 @@ li {
     .post-latest-news .container-posts .post .content-post .post-image {
         max-height: 33vh !important;
     }
+
+    .main-post .post-image {
+        height: 60vh !important;
+        min-height: 60vh !important;
+        /* object-fit: contain !important; */
+    }
+    .main-post .post-image img {
+        object-fit: cover !important;
+    }
+
 }
