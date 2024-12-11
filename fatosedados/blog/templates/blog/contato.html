@@ -9,7 +9,7 @@
         <p>Entre em contato conosco preenchendo o formulário abaixo:</p>
     </div>
 
-    <form action="{% url 'contato' %}" method="post" class="contact-form">
+    <form action="{% url 'contato' %}" method="post" class="generic-form">
         {% csrf_token %}
         <div class="input">
             <label for="name">Nome</label>
