@@ -160,6 +160,7 @@ def post_list(request):
     
     return render(request, 'blog/post_list.html', {'posts': posts, 'latest_posts': latest_posts, 'recommendations_posts': recommendations_posts})
 
+@login_required(login_url='/login/')
 def create_post(request):
     if request.method == 'POST':
         title = request.POST.get('title')
@@ -183,8 +184,9 @@ def create_post(request):
     
     return render(request, 'blog/create_post.html')
 
+@login_required(login_url='/login/')
 def create_post_v2(request):
-
+    
     categories = dict(POST_CATEGORIES)
     context = {
         "categories": categories
@@ -242,6 +244,7 @@ def remove_images(old_image_dir):
         print(f"\n\n ERROR REMOVE IMAGES | ERROR: {e}")
         print(f"Diretório: {old_image_dir}")
 # ---
+@login_required(login_url='/login/')
 def post_edit(request, post_id):
 
     postFilter = Post.objects.all().filter(id=post_id).first()
@@ -296,6 +299,8 @@ def post_edit(request, post_id):
     else:
         return JsonResponse({"404": "not-found"})
 # ---
+
+@login_required(login_url='/login/')
 def post_delete(request, post_id):
 
     postFilter = Post.objects.all().filter(id=post_id).first()
