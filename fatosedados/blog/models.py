@@ -9,10 +9,17 @@ from django.conf import settings
 
 
 POST_CATEGORIES = (
+    ("uncategorized", "Selecione uma categotia"),
     ("Technology", "Tecnologia"),
     ("Economy", "Economia"),
     ("Policy", "Política"),
-    ("uncategorized", "Nenhuma"),
+    ("Health", "Saúde"),
+    ("Education", "Educação"),
+    ("Environment", "Meio Ambiente"),
+    ("Science", "Ciência"),
+    ("Sports", "Esportes"),
+    ("Entertainment", "Entretenimento"),
+    ("Lifestyle", "Estilo de Vida"),
 )
 
 class UserRegistrationManager(BaseUserManager):
