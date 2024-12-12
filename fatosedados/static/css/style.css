@@ -351,7 +351,7 @@ li {
 
 .generic-form .input input:focus,
 .generic-form .input textarea:focus {
-    border-color: #007bff;
+    border-color: #ea1db3;
 }
 
 .generic-form .input textarea {

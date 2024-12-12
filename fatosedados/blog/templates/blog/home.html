@@ -2,8 +2,8 @@
 {% load static %}
 {% block title %} Home {% endblock %}
 {% block content %}
-    
-
+    <!-- #ef00ff -->
+    <!-- #ea1db3 -->
     <section class="divider">
 
         <div class="block-divider content-flex-end">
@@ -13,7 +13,11 @@
                 <p>Nossa ferramenta transforma suas ideias em textos criativos e de alta qualidade, ideais para blogs, redes sociais e campanhas.</p>
                 <div class="title-links">
                     <ul>
-                        <li><a href="{% url 'register' %}">Crie sua conta agora</a></li>
+                        {% if user.is_authenticated %}
+                            <li><a href="{% url 'create_post' %}">Criar conteúdo</a></li>
+                        {% else %}
+                            <li><a href="{% url 'register' %}">Crie sua conta agora</a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>

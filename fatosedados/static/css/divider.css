@@ -64,7 +64,7 @@
     text-decoration: none;
     color: #ffffff;
     background-color: black;
-    box-shadow: rgb(175 240 23) 0px 8px 24px;
+    box-shadow: #ea1db3 0px 8px 24px;
     transition: 0.3s ease-in-out;
 }
 .block-divider .title-page .title-links ul li a:hover {
