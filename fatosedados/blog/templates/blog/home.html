@@ -14,9 +14,10 @@
                 <div class="title-links">
                     <ul>
                         {% if user.is_authenticated %}
-                            <li><a href="{% url 'create_post' %}">Criar conteúdo</a></li>
+                        <li><a href="{% url 'create_post' %}">Criar conteúdo</a></li>
                         {% else %}
-                            <li><a href="{% url 'register' %}">Crie sua conta agora</a></li>
+                            <!-- <li><a href="{% url 'login' %}">Entrar</a></li> -->
+                            <li><a href="{% url 'register' %}">Comece agora</a></li>
                         {% endif %}
                     </ul>
                 </div>
