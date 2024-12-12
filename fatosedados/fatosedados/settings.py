@@ -78,6 +78,15 @@ CSP_FRAME_SRC = (
     "https://securepubads.g.doubleclick.net",
 )
 
+CSP_FENCED_FRAME_SRC = (
+    "'self'",
+    "https://googleads.g.doubleclick.net",
+    "https://ep2.adtrafficquality.google",
+    "https://www.google.com",
+    "https://td.doubleclick.net",
+    "https://securepubads.g.doubleclick.net",
+)
+
 CSP_FRAME_ANCESTORS = (
     "'self'",
     "https://www.google.com",
