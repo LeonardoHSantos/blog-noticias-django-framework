@@ -3,18 +3,39 @@
 {% block title %} Home {% endblock %}
 {% block content %}
     
-    <div class="title-page">
-        <h1>Bem vindo(a), confira os destaques</h1>
-    </div>
 
-    <!-- <div class="container-categories">
-        <h2>Categorias</h2>
-        <ul>
-            <li><a href="">Economia</a></li>
-            <li><a href="">Política</a></li>
-            <li><a href="">Mundo</a></li>
-        </ul>
-    </div> -->
+    <section class="divider">
+
+        <div class="block-divider content-flex-end">
+            <div class="title-page">
+                <h1>Gere conteúdos <br> Utilizando <br> Inteligência Artificial</h1>
+                <p>Simplifique seu processo criativo e economize tempo</p>
+                <p>Nossa ferramenta transforma suas ideias em textos criativos e de alta qualidade, ideais para blogs, redes sociais e campanhas.</p>
+                <div class="title-links">
+                    <ul>
+                        <li><a href="{% url 'register' %}">Crie sua conta agora</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="block-divider">
+            <div class="block-cards">
+                {% for post in latest_posts %}
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-image">
+                                <img src="{{ post.cover_image.url }}" alt="Imagem de Card">
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    
+    </section>
+
+    
 
     <div class="container-principal">
         

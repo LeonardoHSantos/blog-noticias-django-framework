@@ -22,7 +22,7 @@ from groq import Groq
 def home(request):
    posts = Post.objects.all().order_by("-number_of_visitors")[:3]
    addtional_images = PostImage.objects.all()
-   latest_posts = Post.objects.all().order_by("-created_at")[:3]
+   latest_posts = Post.objects.all().order_by("-created_at")[:4]
    return render(request, 'blog/home.html', {'posts': posts, 'addtional_images': addtional_images, 'latest_posts': latest_posts})
 
 def contato(request):
