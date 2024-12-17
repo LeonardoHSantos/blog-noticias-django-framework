@@ -67,6 +67,7 @@ CSP_SCRIPT_SRC = (
     "https://cdn.jsdelivr.net",
     "https://www.gstatic.com",
     "https://securepubads.g.doubleclick.net",
+    "https://connect.facebook.net/",
 )
 
 CSP_FRAME_SRC = (
