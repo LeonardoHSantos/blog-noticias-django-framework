@@ -104,6 +104,9 @@ CSP_CONNECT_SRC = (
     "https://pagead2.googlesyndication.com",
     "https://googleads.g.doubleclick.net",
     "https://www.googletagmanager.com",
+    "https://graph.facebook.com/",
+    "https://graph.facebook.com/",
+    "https://www.facebook.com/",
 )
 
 CSP_IMG_SRC = (
