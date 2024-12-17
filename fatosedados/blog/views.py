@@ -1,6 +1,7 @@
 import os
 import re
 import json
+import requests
 from datetime import datetime
 
 from django.shortcuts import render, redirect
@@ -524,3 +525,21 @@ def api_v1_generate_post_text_with_groq_IA(request):
         })
 
 
+# ------------------------------------------- API | META | INSTAGRAM -------------------------------------------
+def instagram_login(request):
+    
+    API_META_REDIRECT_URI = os.getenv("API_META_REDIRECT_URI")
+    API_META_CLIENT_ID = os.getenv("API_META_CLIENT_ID")
+    API_META_CLIENT_SECRET = os.getenv("API_META_CLIENT_SECRET")
+    url = f'https://api.instagram.com/oauth/authorize/?client_id={API_META_CLIENT_ID}&redirect_uri={API_META_REDIRECT_URI}&response_type=code'
+    print(f"""
+        ------------------- API | META | AUTH | V.1
+        url: {url}
+    """)
+    return redirect(url)
+
+def api_v1_instagram(request):
+    return JsonResponse({
+        "code": 200,
+        "msg": "api v1 - auth instagram."
+    })

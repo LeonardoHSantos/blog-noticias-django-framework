@@ -8,4 +8,5 @@ __pycache__
 *.sqlite3
 db.sqlite3
 test.py
+api_instagram.py
 demonstracao-site

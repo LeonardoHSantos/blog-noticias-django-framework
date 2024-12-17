@@ -40,6 +40,10 @@ urlpatterns = [
     # GROQ
     path('api/groq/v1/generate-post-text-with-groq-IA/', views.api_v1_generate_post_text_with_groq_IA, name='api_v1_generate_post_text_with_groq_IA'),
 
+    # -----------  API | META | INSTAGRAM -----------
+    path('api/instagram_login', views.instagram_login, name='instagram_login'),
+    path('api/v1/instagram', views.api_v1_instagram, name='api_v1_instagram'),
+
 ]
 
 if not settings.DEBUG:
