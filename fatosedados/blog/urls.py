@@ -42,7 +42,7 @@ urlpatterns = [
 
     # -----------  API | META | INSTAGRAM -----------
     path('api/instagram_login', views.instagram_login, name='instagram_login'),
-    path('api/v1/instagram', views.api_v1_instagram, name='api_v1_instagram'),
+    path('oauth/', views.api_v1_instagram, name='api_v1_instagram'),
 
 ]
 
