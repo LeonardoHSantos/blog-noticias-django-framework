@@ -78,7 +78,7 @@
     {% endblock %}
     
     <fb:login-button 
-    config_id="{config_id}"
+    config_id="public_profile,email"
     onlogin="checkLoginState();">
     </fb:login-button>
     
@@ -194,18 +194,20 @@
 </script>
 
 
-<!-- facebook -->
+<!-- Facebook SDK -->
 <script>
   window.fbAsyncInit = function() {
     FB.init({
-      appId      : '{your-app-id}',
+      appId      : '989236039705518',  // Substitua pelo seu app ID
       cookie     : true,
       xfbml      : true,
-      version    : '{api-version}'
+      version    : 'v21.0'   // Substitua pela versão da API do Facebook
     });
-      
-    FB.AppEvents.logPageView();   
-      
+    
+    FB.AppEvents.logPageView(); // Registro de eventos de página
+
+    // Chama o método após inicializar
+    checkLoginState();
   };
 
   (function(d, s, id){
@@ -217,23 +219,25 @@
    }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<script defer>
-  FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-  });
-
-
-
-
-
+<script>
+  // Verifica o estado de login
   function checkLoginState() {
     FB.getLoginStatus(function(response) {
       statusChangeCallback(response);
     });
   }
 
-
-
-
-
+  // Função para tratar a resposta de login
+  function statusChangeCallback(response) {
+    console.log('Resposta do status de login: ', response);
+    if (response.status === 'connected') {
+      // O usuário está logado
+      console.log('Usuário logado no Facebook');
+    } else {
+      // O usuário não está logado
+      console.log('Usuário não está logado');
+    }
+  }
 </script>
+
+

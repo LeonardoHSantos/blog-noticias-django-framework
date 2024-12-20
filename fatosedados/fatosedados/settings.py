@@ -50,11 +50,13 @@ CSP_STYLE_SRC = (
     "'self'",
     "'unsafe-inline'",
     "https://fonts.googleapis.com",
+    "https://www.facebook.com",
 )
 
 CSP_FONT_SRC = (
     "'self'",
     "https://fonts.gstatic.com",
+    "https://www.facebook.com",
 )
 
 CSP_SCRIPT_SRC = (
@@ -68,6 +70,8 @@ CSP_SCRIPT_SRC = (
     "https://www.gstatic.com",
     "https://securepubads.g.doubleclick.net",
     "https://connect.facebook.net/",
+    "https://www.facebook.com",
+    "https://developers.facebook.com/",
 )
 
 CSP_FRAME_SRC = (
@@ -77,6 +81,8 @@ CSP_FRAME_SRC = (
     "https://www.google.com",
     "https://td.doubleclick.net",
     "https://securepubads.g.doubleclick.net",
+    "https://www.facebook.com",
+    
 )
 
 CSP_FENCED_FRAME_SRC = (
@@ -86,12 +92,14 @@ CSP_FENCED_FRAME_SRC = (
     "https://www.google.com",
     "https://td.doubleclick.net",
     "https://securepubads.g.doubleclick.net",
+    "https://www.facebook.com",
 )
 
 CSP_FRAME_ANCESTORS = (
     "'self'",
     "https://www.google.com",
     "https://googleads.g.doubleclick.net",
+    "https://www.facebook.com",
 )
 
 CSP_CONNECT_SRC = (
@@ -107,6 +115,7 @@ CSP_CONNECT_SRC = (
     "https://graph.facebook.com/",
     "https://graph.facebook.com/",
     "https://www.facebook.com/",
+    "https://developers.facebook.com/",
 )
 
 CSP_IMG_SRC = (
@@ -119,6 +128,7 @@ CSP_IMG_SRC = (
     "https://www.googletagmanager.com",
     "https://securepubads.g.doubleclick.net",
     "https://www.gstatic.com",
+    "https://www.facebook.com",
 )
 
 
