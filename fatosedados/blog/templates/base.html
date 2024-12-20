@@ -72,10 +72,16 @@
   <!-- End Google Tag Manager (noscript) -->
     
     {% include 'snippets/navbar/navbar.html' %}
+
     
     {% block content %}
     {% endblock %}
-
+    
+    <fb:login-button 
+    config_id="{config_id}"
+    onlogin="checkLoginState();">
+    </fb:login-button>
+    
     {% include 'snippets/footer/footer.html' %}
 
     <!-- Banner de Cookies -->
@@ -192,10 +198,10 @@
 <script>
   window.fbAsyncInit = function() {
     FB.init({
-      appId      : '835612715910174',
+      appId      : '{your-app-id}',
       cookie     : true,
       xfbml      : true,
-      version    : 'v21.0'
+      version    : '{api-version}'
     });
       
     FB.AppEvents.logPageView();   
@@ -211,25 +217,23 @@
    }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<script async>
-  
+<script defer>
   FB.getLoginStatus(function(response) {
       statusChangeCallback(response);
   });
+
+
+
+
 
   function checkLoginState() {
     FB.getLoginStatus(function(response) {
       statusChangeCallback(response);
     });
   }
-  checkLoginState();
 
-  function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
-      console.log('Successful login for: ' + response.name);
-      document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.name + '!';
-    });
-  }
+
+
+
+
 </script>
